@@ -18,9 +18,9 @@ use App\Http\Controllers\Admin\CategoryController;
 Route::get('/', [AdminController::class, 'index'])->name('menus.index');
 
 
-//Route::get('/', function () {
-//    return view('admin.page.main');
-//})->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('admin.page.main');
+})->name('dashboard');
 
 Route::prefix('menus')->group(function () {
     Route::get('/', [MenuController::class, 'index'])->name('menus.index');
