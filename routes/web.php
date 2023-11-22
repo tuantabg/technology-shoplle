@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CategoryController;
 
@@ -14,9 +15,12 @@ use App\Http\Controllers\Admin\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.page.main');
-})->name('dashboard');
+Route::get('/', [AdminController::class, 'index'])->name('menus.index');
+
+
+//Route::get('/', function () {
+//    return view('admin.page.main');
+//})->name('dashboard');
 
 Route::prefix('menus')->group(function () {
     Route::get('/', [MenuController::class, 'index'])->name('menus.index');
