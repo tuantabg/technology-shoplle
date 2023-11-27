@@ -17,9 +17,11 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('price');
+            $table->string('product_code');
+            $table->string('discount')->nullable();
             $table->string('feature_image_path')->nullable();
-            $table->text('detail');
-            $table->text('content');
+            $table->text('detail')->nullable();
+            $table->text('content')->nullable();
             $table->integer('user_id');
             $table->integer('category_id');
             $table->softDeletes();

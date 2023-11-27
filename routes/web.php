@@ -19,7 +19,8 @@ use App\Http\Controllers\Admin\ProductController;
 Route::get('/admin', [AdminController::class, 'login'])->name('login.admin');
 Route::post('/admin', [AdminController::class, 'postLogin'])->name('post.login.admin');
 
-Route::prefix('admin')->group(function () {
+
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function () {
     Route::get('/dashboard', function () {
         return view('admin.page.main');
     })->name('dashboard');
@@ -57,3 +58,4 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('products.update');
     });
 });
+

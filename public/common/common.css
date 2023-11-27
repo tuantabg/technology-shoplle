@@ -1,0 +1,31 @@
+/* Main product photo */
+.file-upload {background-color: #ffffff;margin: 0;padding: 0;}
+.file-upload-content {display: none;text-align: center;position: relative; padding: 4px; border: 1px solid #15824B;}
+.file-upload-input {position: absolute;margin: 0;padding: 0;width: 100%;height: 100%;outline: none;opacity: 0;cursor: pointer;}
+.image-upload-wrap {border: 1px solid #1FB264;position: relative;width: 100%;height: 236px;}
+.image-dropping, .image-upload-wrap:hover {background-color: #1FB264;border: 1px solid #ffffff;}
+.image-title-wrap {position: absolute; top: 15px; right: 15px;}
+.drag-text {text-align: center;height: 100%;display: flex;justify-content: center;align-items: center;}
+.drag-text h3 {font-weight: 100;text-transform: uppercase;color: #15824B;padding: 60px 0;}
+.file-upload-image {max-height: 100%;max-width: 100%;margin: 0;padding: 0;}
+.remove-image {font-size: 14px;margin: 0;color: #fff;background: rgba(0, 0, 0, 0.5);border: none;padding: 3px 8px 1px;border-radius: 50%;border-bottom: 1px solid transparent;}
+.remove-image:hover {background: rgba(0, 0, 0, 0.5);color: #ffffff;transition: all .2s ease;cursor: pointer;}
+.remove-image:active {border: 0;transition: all .2s ease;}
+
+/* Add photo description */
+.upload__box {}
+.upload__inputfile {width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;}
+.upload__btn {display: block;font-weight: 600;color: #fff;text-align: center;min-width: 116px;padding: 5px;transition: all 0.3s ease;cursor: pointer;border: 1px solid #4045ba;background-color: #4045ba;border-radius: 4px;line-height: 26px;font-size: 14px;margin-bottom: 0;}
+.upload__btn:hover {background-color: unset;color: #4045ba;transition: all 0.3s ease;}
+.upload__btn-box {margin-bottom: 10px;}
+.upload__img-wrap {display: flex;flex-wrap: wrap;margin: 0;border: 1px solid #15824B;min-height: 236px;}
+.upload__img-box {width: 117px;padding: 4px;}
+.upload__img-close {width: 24px;height: 24px;border-radius: 50%;background-color: rgba(0, 0, 0, 0.5);position: absolute;top: 10px;right: 10px;text-align: center;line-height: 24px;z-index: 1;cursor: pointer;}
+.upload__img-close:after {content: "\2716";font-size: 14px;color: white;}
+.img-bg {background-repeat: no-repeat;background-position: center;background-size: cover;position: relative;padding-bottom: 100%;}
+
+/* Style select2 tags */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {background-color: #007bff;}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display {padding-left: 8px;}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{margin-left: 0; margin-right: 0;}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{padding: 0 8px;}
