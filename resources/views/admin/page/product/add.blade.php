@@ -54,12 +54,6 @@
                                                         <a class="list-group-item list-group-item-action"
                                                            id="list-profile-list" data-toggle="list" href="#list-profile"
                                                            role="tab" aria-controls="profile">Profile</a>
-                                                        <a class="list-group-item list-group-item-action"
-                                                           id="list-messages-list" data-toggle="list" href="#list-messages"
-                                                           role="tab" aria-controls="messages">Messages</a>
-                                                        <a class="list-group-item list-group-item-action"
-                                                           id="list-settings-list" data-toggle="list" href="#list-settings"
-                                                           role="tab" aria-controls="settings">Settings</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-9">
@@ -82,12 +76,6 @@
                                                         <div class="tab-pane fade"
                                                              id="list-profile" role="tabpanel"
                                                              aria-labelledby="list-profile-list">...</div>
-                                                        <div class="tab-pane fade"
-                                                             id="list-messages" role="tabpanel"
-                                                             aria-labelledby="list-messages-list">...</div>
-                                                        <div class="tab-pane fade"
-                                                             id="list-settings" role="tabpanel"
-                                                             aria-labelledby="list-settings-list">...</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,7 +91,7 @@
 
                                             <div class="form-group">
                                                 <label>Mô tả chi tiết</label>
-                                                <textarea id="detailed_description" class=" form-control description-editor" name="content"></textarea>
+                                                <textarea id="detailed_description" class=" form-control description-editor" name="contents"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -112,8 +100,13 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="parent_id">Chọn danh mục</label>
-                                                <select class="form-control" name="parent_id" id="parent_id" >
+                                                <label for="product_code">Mã sản phẩm</label>
+                                                <input type="text" class="form-control"
+                                                       id="product_code" name="product_code" placeholder="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="category_id">Chọn danh mục</label>
+                                                <select class="form-control" name="category_id" id="category_id" >
                                                     {!! $htmlOption !!}
                                                 </select>
                                             </div>
@@ -141,7 +134,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="feature_image_path_multiple">Upload ảnh mô tả</label>
+                                                <label for="feature_image_path_multiple">Upload ảnh chi tiết</label>
                                                 <div class="upload__box">
                                                     <div class="upload__btn-box">
                                                         <label class="upload__btn">

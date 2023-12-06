@@ -9,6 +9,8 @@ class AdminController extends Controller
 {
     public function login()
     {
+//        dd(bcrypt('123456'));
+
         if (auth()->check()) {
             return redirect()->route('dashboard');
         }
