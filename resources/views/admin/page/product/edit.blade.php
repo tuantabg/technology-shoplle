@@ -1,34 +1,22 @@
 @extends('admin.layout')
-@section('title', 'Thêm Mới sản phẩm')
+@section('title', 'Chỉnh sửa sản phẩm')
 @section('style')
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.css') }}">
     <link href="{{ asset('common/select2/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('common/common.css') }}">
 @endsection
 @section('content')
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.header-page', ['name'=> 'Thêm Mới sản phẩm', 'key' => false, 'route' => null])
+        @include('admin.partials.header-page', ['name'=> 'Chỉnh sửa sản phẩm', 'key' => false, 'route' => null])
 
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
                         <!-- form start -->
-                        <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('products.update', ['id' => $product->id]) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-9 col-md-8 col-sm-12">
@@ -37,13 +25,17 @@
                                             <div class="form-group">
                                                 <label for="name_menu">Tên sản phẩm</label>
                                                 <input type="text" class="form-control"
-                                                       id="name_menu" name="name" placeholder="Tên menu">
+                                                       id="name_menu" name="name"
+                                                       placeholder="Tên menu"
+                                                       value="{{ $product->name }}">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="tags">Tags</label>
                                                 <select class="form-control tags_select_choose" multiple="multiple" name="tags[]" id="tags">
-
+                                                    @foreach($product->tags as $key => $productTag)
+                                                        <option value="{{ $productTag->name }}" selected> {{ $productTag->name }} </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -83,12 +75,12 @@
                                                             <div class="form-group mb-3">
                                                                 <label class="col-sm-2 justify-content-start" for="name_menu">Giá</label>
                                                                 <input type="text" class="form-control col-auto mx-sm-3"
-                                                                       id="name_menu" name="price" />
+                                                                       id="name_menu" name="price" value="{{ $product->price }}" />
                                                             </div>
                                                             <div class="form-group mb-3">
                                                                 <label class="col-sm-2 justify-content-start" for="name_menu">Giá khuyến mãi</label>
                                                                 <input type="text" class="form-control col-auto mx-sm-3"
-                                                                       id="name_menu" name="discount" />
+                                                                       id="name_menu" name="discount" value="{{ $product->discount }}" />
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane fade"
@@ -104,12 +96,14 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label>Mô tả ngắn</label>
-                                                <textarea id="short_description" class="form-control description-editor" name="detail"></textarea>
+                                                <textarea id="short_description" class="form-control description-editor"
+                                                          name="detail">{{ $product->detail }}</textarea>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Mô tả chi tiết</label>
-                                                <textarea id="detailed_description" class=" form-control description-editor" name="contents"></textarea>
+                                                <textarea id="detailed_description" class=" form-control description-editor"
+                                                          name="contents">{{ $product->content }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +114,7 @@
                                             <div class="form-group">
                                                 <label for="product_code">Mã sản phẩm</label>
                                                 <input type="text" class="form-control"
-                                                       id="product_code" name="product_code" placeholder="">
+                                                       id="product_code" name="product_code" value="{{ $product->product_code }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="category_id">Chọn danh mục</label>
@@ -131,17 +125,19 @@
                                             <div class="form-group">
                                                 <div class="file-upload">
                                                     <label for="feature_image_path">Upload ảnh</label>
-                                                    <div class="image-upload-wrap">
+                                                    <div class="image-upload-wrap" style="{{ $product->feature_image_path ? 'display: none' : '' }}">
                                                         <input id="feature_image_path"
                                                                class="file-upload-input form-control-file"
                                                                name="feature_image_path" type='file'
-                                                               onchange="readURL(this);" accept="image/*" />
+                                                               onchange="readURL(this);" accept="image/*"
+                                                               value="{{ $product->feature_image_path }}"/>
                                                         <div class="drag-text">
                                                             <h3>Ảnh sản phẩm chính</h3>
                                                         </div>
                                                     </div>
-                                                    <div class="file-upload-content">
-                                                        <img id="feature_upload_image" class="file-upload-image form-control-file" src="#" alt="your image" />
+                                                    <div class="file-upload-content" style="{{ $product->feature_image_path ? 'display: block' : '' }}">
+                                                        <img id="feature_upload_image" class="file-upload-image form-control-file"
+                                                             src="{{ $product->feature_image_path }}" alt="{{ $product->feature_image_name }}" />
                                                         <div class="image-title-wrap">
                                                             <button type="button" onclick="removeUpload()" class="remove-image">
                                                                 <i class="fa fa-times nav-icon" aria-hidden="true"></i>
@@ -158,11 +154,21 @@
                                                         <label class="upload__btn">
                                                             <span><i class="fa fa-upload mr-2" aria-hidden="true"></i>TẢI HÌNH ẢNH</span>
                                                             <input type="file" multiple data-max_length="20" name="image_path[]"
-                                                                   class="upload__inputfile form-control-file" id="feature_image_path_multiple"
-                                                                   accept="image/*">
+                                                                   class="upload__inputfile form-control-file"
+                                                                   id="feature_image_path_multiple">
                                                         </label>
                                                     </div>
-                                                    <div class="upload__img-wrap"></div>
+                                                    <div class="upload__img-wrap">
+                                                        @foreach($product->productImages as $key => $productImage)
+                                                            <div class='upload__img-box'>
+                                                                <div style='background-image:url("{{ $productImage->image_path }}")'
+                                                                     data-number="{{ $loop->index + 1 }}"
+                                                                     data-file="{{ $productImage->image_name }}" class='img-bg'>
+                                                                    <div class='upload__img-close'></div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

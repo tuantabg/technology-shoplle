@@ -11,12 +11,14 @@ $(document).ready(function() {
     })
 });
 
+// upload one image
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
             $('.image-upload-wrap').hide();
             $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-input').attr('value', e.target.result);
             $('.file-upload-content').show();
             $('.image-title').html(input.files[0].name);
         };
@@ -29,7 +31,7 @@ function readURL(input) {
 function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
     $('.file-upload-content').hide();
-    $('#feature_image_path').val('');
+    $('#feature_image_path').attr('value', '');
     $('#feature_upload_image').attr('src', '');
     $('.image-upload-wrap').show();
 }
@@ -40,22 +42,23 @@ $('.image-upload-wrap').bind('dragleave', function () {
     $('.image-upload-wrap').removeClass('image-dropping');
 });
 
+// upload multiple images
 jQuery(document).ready(function () {
     ImgUpload();
 });
 
 function ImgUpload() {
-    var imgWrap = "";
-    var imgArray = [];
+    let imgWrap = "";
+    let imgArray = [];
 
     $('.upload__inputfile').each(function () {
         $(this).on('change', function (e) {
             imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
-            var maxLength = $(this).attr('data-max_length');
+            let maxLength = $(this).attr('data-max_length');
 
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
-            var iterator = 0;
+            let files = e.target.files;
+            let filesArr = Array.prototype.slice.call(files);
+            let iterator = 0;
             filesArr.forEach(function (f, index) {
 
                 if (!f.type.match('image.*')) {
@@ -65,8 +68,8 @@ function ImgUpload() {
                 if (imgArray.length > maxLength) {
                     return false
                 } else {
-                    var len = 0;
-                    for (var i = 0; i < imgArray.length; i++) {
+                    let len = 0;
+                    for (let i = 0; i < imgArray.length; i++) {
                         if (imgArray[i] !== undefined) {
                             len++;
                         }
@@ -76,9 +79,9 @@ function ImgUpload() {
                     } else {
                         imgArray.push(f);
 
-                        var reader = new FileReader();
+                        let reader = new FileReader();
                         reader.onload = function (e) {
-                            var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+                            let html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
                             imgWrap.append(html);
                             iterator++;
                         }
@@ -90,8 +93,8 @@ function ImgUpload() {
     });
 
     $('body').on('click', ".upload__img-close", function (e) {
-        var file = $(this).parent().data("file");
-        for (var i = 0; i < imgArray.length; i++) {
+        let file = $(this).parent().data("file");
+        for (let i = 0; i < imgArray.length; i++) {
             if (imgArray[i].name === file) {
                 imgArray.splice(i, 1);
                 break;
@@ -103,11 +106,18 @@ function ImgUpload() {
 
 $(".tags_select_choose").select2({
     tags: true,
-    tokenSeparators: [',', ' ']
+    tokenSeparators: [',']
 })
 $(".select_choose").select2({
     allowClear: true
 })
 
+// Show and hide alert
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 2000);
+});
 
 
