@@ -70,7 +70,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ optional($product->category)->name }}</td>
-                                                    <td>{{ $product->detail }}</td>
+                                                    <td>{!! $product->detail !!}</td>
                                                     <td class="text-right">
                                                         <a href="{{ route('products.edit', ['id' => $product->id]) }}" class="btn btn-primary btn-sm">
                                                             <i class="fa fa-edit" aria-hidden="true"></i>
@@ -132,7 +132,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ optional($deletedProductItem->category)->name }}</td>
-                                                    <td>{{ $deletedProductItem->detail }}</td>
+                                                    <td>{!! $deletedProductItem->detail !!}</td>
                                                     <td class="text-right">
                                                         <a href="{{ route('products.delete.recover', ['id' => $deletedProductItem->id]) }}"
                                                            class="btn btn-primary btn-sm">
