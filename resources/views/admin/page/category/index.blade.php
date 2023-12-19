@@ -19,37 +19,95 @@
 
                         <div class="card">
                             <div class="card-body table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Tên danh mục</th>
-                                        <th scope="col">Slug</th>
-                                        <th class="text-right" scope="col">Tác vụ</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($categories as $key => $category)
-                                        <tr>
-                                            <th scope="row">{{ $loop->index + 1 }}</th>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>
-                                            <td class="text-right">
-                                                <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="{{ route('categories.delete', ['id' => $category->id]) }}"  class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-uppercase active" id="nav-product-tab" data-toggle="pill"
+                                           href="#nav-product" role="tab" aria-controls="pills-home"
+                                           aria-selected="true">Sản phẩm
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
+                                           href="#nav-product-delete" role="tab" aria-controls="nav-product-delete"
+                                           aria-selected="false">Sản phẩm đã xóa
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active"
+                                         id="nav-product" role="tabpanel"
+                                         aria-labelledby="nav-product-tab">
+                                        <table class="table table-hover">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên danh mục</th>
+                                                <th scope="col">Slug</th>
+                                                <th class="text-right" scope="col">Tác vụ</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($categories as $key => $category)
+                                                <tr>
+                                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                                    <td>{{ $category->name }}</td>
+                                                    <td>{{ $category->slug }}</td>
+                                                    <td class="text-right">
+                                                        <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-primary btn-sm">
+                                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                                        </a>
+                                                        <button
+                                                            data-url="{{ route('categories.delete', ['id' => $category->id]) }}"
+                                                            class="btn btn-danger btn-sm action-delete">
+                                                            <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+
+                                        {{ $categories->links() }}
+                                    </div>
+                                    <div class="tab-pane fade"
+                                         id="nav-product-delete" role="tabpanel"
+                                         aria-labelledby="nav-product-delete-tab">
+                                        <table class="table table-hover">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên danh mục</th>
+                                                <th scope="col">Slug</th>
+                                                <th class="text-right" scope="col">Tác vụ</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($deletedCategories as $key => $deletedCategory)
+                                                <tr>
+                                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                                    <td>{{ $deletedCategory->name }}</td>
+                                                    <td>{{ $deletedCategory->slug }}</td>
+                                                    <td class="text-right">
+                                                        <a href="{{ route('categories.delete.recover', ['id' => $deletedCategory->id]) }}"
+                                                           class="btn btn-primary btn-sm">
+                                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                                        </a>
+                                                        <button
+                                                            data-url="{{ route('categories.delete.permanently', ['id' => $deletedCategory->id]) }}"
+                                                            class="btn btn-danger btn-sm action-delete">
+                                                            <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+
+                                        {{ $deletedCategories->links() }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        {{ $categories->links() }}
                     </div>
                     <!-- /.col-md-6 -->
                 </div>
@@ -62,12 +120,7 @@
 
 @endsection
 @section('javascript')
-    <script language="javascript">
-        $(document).ready(function() {
-            // show the alert
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 2000);
-        });
-    </script>
+    <script src="{{ asset('common/sweetalert2/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('common/sweetalert2/configSweetAlert2.js') }}"></script>
+    <script src="{{ asset('common/alertSetTimeout.js') }}"></script>
 @endsection

@@ -42,6 +42,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
         Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
         Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
+        Route::get('/delete/permanently/{id}', [CategoryController::class, 'deletePermanently'])->name('categories.delete.permanently');
+        Route::get('/delete/recover/{id}', [CategoryController::class, 'deleteRecover'])->name('categories.delete.recover');
 
         Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
@@ -53,6 +55,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
         Route::get('/create', [ProductController::class, 'create'])->name('products.create');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
         Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
+        Route::get('/delete/permanently/{id}', [ProductController::class, 'deletePermanently'])->name('products.delete.permanently');
+        Route::get('/delete/recover/{id}', [ProductController::class, 'deleteRecover'])->name('products.delete.recover');
 
         Route::post('/store', [ProductController::class, 'store'])->name('products.store');
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('products.update');

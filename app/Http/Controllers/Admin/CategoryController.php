@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Components\Recusive;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -19,8 +20,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->category->latest()->paginate(10);
+        $deletedCategories = $this->category->onlyTrashed()->latest()->paginate(10);
 
-        return view('admin.page.category.index', compact('categories'));
+        return view('admin.page.category.index', compact('categories', 'deletedCategories'));
     }
 
     public function create()
@@ -62,9 +64,45 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        $this->category->find($id)->delete();
+        try {
+            $this->category->find($id)->delete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success'
+            ], 200);
 
-        return redirect()->route('categories.index');
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'fail'
+            ], 500);
+        }
+    }
+
+    public function deletePermanently($id)
+    {
+        try {
+            $this->category->withTrashed()->find($id)->forceDelete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success'
+            ], 200);
+
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'fail'
+            ], 500);
+        }
+    }
+
+    public function deleteRecover($id)
+    {
+        $this->category->withTrashed()->where('id', $id)->restore();
+
+        return redirect()->route('categories.index')->with('message','Lấy lại danh mục thành công');
     }
 
     public function getCategory($parentId)

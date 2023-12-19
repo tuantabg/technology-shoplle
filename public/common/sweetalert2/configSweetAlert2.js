@@ -1,6 +1,6 @@
 // Js SweetAlert2
 $(function () {
-    $(document).on('click', '.action-delete', actionDelete)
+    $(document).on('click', '.action-delete', actionDelete);
 })
 
 function actionDelete(event) {
@@ -23,14 +23,12 @@ function actionDelete(event) {
                 type: "GET",
                 url: urlRequest,
                 success: function (data) {
-                    if (data.code == 200) {
-                        that.parent().parent().remove();
-                        Swal.fire({
-                            title: "Đã xóa!",
-                            text: "Tập tin của bạn đã bị xóa.",
-                            icon: "success"
-                        });
-                    }
+                    that.parent().parent().remove();
+                    Swal.fire({
+                        title: "Đã xóa!",
+                        text: "Tập tin của bạn đã bị xóa.",
+                        icon: "success"
+                    });
                 },
                 error: function () {}
             })

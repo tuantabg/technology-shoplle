@@ -42,8 +42,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->product->latest()->paginate(10);
+        $deletedProducts = $this->product->onlyTrashed()->latest()->paginate(10);
 
-        return view('admin.page.product.index', compact('products'));
+        return view('admin.page.product.index', compact('products', 'deletedProducts'));
     }
 
     public function create()
@@ -95,9 +96,9 @@ class ProductController extends Controller
                     // Insert to tags
                     $tagInstance = $this->tag->firstOrCreate(['name'=> $tagItem]);
                     $tagsId[] = $tagInstance->id;
+                    $product->tags()->attach($tagsId);
                 }
             }
-            $product->tags()->attach($tagsId);
 
             DB::commit();
 
@@ -161,13 +162,13 @@ class ProductController extends Controller
                     // Insert to tags
                     $tagInstance = $this->tag->firstOrCreate(['name'=> $tagItem]);
                     $tagsId[] = $tagInstance->id;
+                    $product->tags()->sync($tagsId);
                 }
             }
-            $product->tags()->sync($tagsId);
 
             DB::commit();
 
-            return redirect()->route('products.index')->with('message','Sửa Sản phẩm thành công');
+            return redirect()->route('products.index')->with('message','Sửa sản phẩm thành công');
 
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -192,6 +193,31 @@ class ProductController extends Controller
                 'message' => 'fail'
             ], 500);
         }
+    }
+
+    public function deletePermanently($id)
+    {
+        try {
+            $this->product->withTrashed()->find($id)->forceDelete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success'
+            ], 200);
+
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'fail'
+            ], 500);
+        }
+    }
+
+    public function deleteRecover($id)
+    {
+        $this->product->withTrashed()->where('id', $id)->restore();
+
+        return redirect()->route('products.index')->with('message','Lấy lại sản phẩm thành công');
     }
 
     public function getCategory($parentId)

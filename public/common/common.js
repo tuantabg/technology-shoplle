@@ -1,14 +1,50 @@
 $(document).ready(function() {
     // Summernote Short Description
-    $('#short_description').summernote({
+    $('#short_description, #detailed_description').summernote({
         tabsize: 2,
-        height: 124,
+        minHeight: 124,
+        placeholder: 'Nhập nội dung....',
+        focus: true,
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+        popover: {
+            image: [
+                ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                ['remove', ['removeMedia']]
+            ],
+            link: [
+                ['link', ['linkDialogShow', 'unlink']]
+            ],
+            table: [
+                ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+                ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+            ],
+            air: [
+                ['color', ['color']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+            ]
+        },
+        codemirror: {
+            theme: 'monokai'
+        }
     })
+
+    $('#short_description').summernote({height: 124})
     // Summernote Detailed Description
-    $('#detailed_description').summernote({
-        tabsize: 2,
-        height: 230,
-    })
+    $('#detailed_description').summernote({height: 230})
 });
 
 // upload one image
@@ -41,6 +77,7 @@ $('.image-upload-wrap').bind('dragover', function () {
 $('.image-upload-wrap').bind('dragleave', function () {
     $('.image-upload-wrap').removeClass('image-dropping');
 });
+
 
 // upload multiple images
 jQuery(document).ready(function () {
@@ -104,6 +141,7 @@ function ImgUpload() {
     });
 }
 
+
 $(".tags_select_choose").select2({
     tags: true,
     tokenSeparators: [',']
@@ -111,13 +149,5 @@ $(".tags_select_choose").select2({
 $(".select_choose").select2({
     allowClear: true
 })
-
-// Show and hide alert
-$(document).ready(function() {
-    // show the alert
-    setTimeout(function() {
-        $(".alert").alert('close');
-    }, 2000);
-});
 
 
