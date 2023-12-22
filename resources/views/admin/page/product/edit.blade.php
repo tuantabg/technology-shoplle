@@ -24,15 +24,22 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="name_menu">Tên sản phẩm</label>
-                                                <input type="text" class="form-control"
-                                                       id="name_menu" name="name"
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                                       id="name_menu"
+                                                       name="name"
                                                        placeholder="Tên menu"
                                                        value="{{ $product->name }}">
+                                                @error('name')
+                                                <div class="alert alert-danger mt-1" role="alert">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="tags">Tags</label>
-                                                <select class="form-control tags_select_choose" multiple="multiple" name="tags[]" id="tags">
+                                                <select class="form-control tags_select_choose"
+                                                        multiple="multiple"
+                                                        name="tags[]"
+                                                        id="tags">
                                                     @foreach($product->tags as $key => $productTag)
                                                         <option value="{{ $productTag->name }}" selected> {{ $productTag->name }} </option>
                                                     @endforeach
@@ -73,14 +80,28 @@
                                                              aria-labelledby="list_common_list">
 
                                                             <div class="form-group mb-3">
-                                                                <label class="col-sm-2 justify-content-start" for="name_menu">Giá</label>
-                                                                <input type="text" class="form-control col-auto mx-sm-3"
-                                                                       id="name_menu" name="price" value="{{ $product->price }}" />
+                                                                <label class="col-sm-2 justify-content-start"
+                                                                       for="name_menu">Giá
+                                                                </label>
+                                                                <div class="input-price">
+                                                                    <input type="text" class="form-control col-auto mx-sm-3 @error('price') is-invalid @enderror"
+                                                                           id="name_menu"
+                                                                           name="price"
+                                                                           value="{{ $product->price }}"/>
+                                                                    @error('price')
+                                                                    <div class="alert alert-danger" style="margin: .25rem 1rem 0">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
                                                             </div>
                                                             <div class="form-group mb-3">
-                                                                <label class="col-sm-2 justify-content-start" for="name_menu">Giá khuyến mãi</label>
-                                                                <input type="text" class="form-control col-auto mx-sm-3"
-                                                                       id="name_menu" name="discount" value="{{ $product->discount }}" />
+                                                                <label class="col-sm-2 justify-content-start"
+                                                                       for="name_menu">Giá khuyến mãi
+                                                                </label>
+                                                                <input type="text"
+                                                                       class="form-control col-auto mx-sm-3"
+                                                                       id="name_menu"
+                                                                       name="discount"
+                                                                       value="{{ $product->discount }}"/>
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane fade"
@@ -95,15 +116,19 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label>Mô tả ngắn</label>
-                                                <textarea id="short_description" class="form-control description-editor"
-                                                          name="detail">{{ $product->detail }}</textarea>
+                                                <label for="short_description">Mô tả ngắn</label>
+                                                <textarea id="short_description"
+                                                          class="form-control description-editor"
+                                                          name="detail">{{ $product->detail }}
+                                                </textarea>
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Mô tả chi tiết</label>
-                                                <textarea id="detailed_description" class=" form-control description-editor"
-                                                          name="contents">{{ $product->content }}</textarea>
+                                                <label for="detailed_description">Mô tả chi tiết</label>
+                                                <textarea id="detailed_description"
+                                                          class=" form-control description-editor"
+                                                          name="contents">{{ $product->content }}
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -114,13 +139,20 @@
                                             <div class="form-group">
                                                 <label for="product_code">Mã sản phẩm</label>
                                                 <input type="text" class="form-control"
-                                                       id="product_code" name="product_code" value="{{ $product->product_code }}">
+                                                       id="product_code"
+                                                       name="product_code"
+                                                       value="{{ $product->product_code }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="category_id">Chọn danh mục</label>
-                                                <select class="form-control" name="category_id" id="category_id" >
+                                                <select class="form-control @error('category_id') is-invalid @enderror"
+                                                        name="category_id"
+                                                        id="category_id" >
                                                     {!! $htmlOption !!}
                                                 </select>
+                                                @error('category_id')
+                                                <div class="alert alert-danger mt-1">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <div class="file-upload">
@@ -136,10 +168,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="file-upload-content" style="{{ $product->feature_image_path ? 'display: block' : '' }}">
-                                                        <img id="feature_upload_image" class="file-upload-image form-control-file"
-                                                             src="{{ $product->feature_image_path }}" alt="{{ $product->feature_image_name }}" />
+                                                        <img id="feature_upload_image"
+                                                             class="file-upload-image form-control-file"
+                                                             src="{{ $product->feature_image_path }}"
+                                                             alt="{{ $product->feature_image_name }}" />
                                                         <div class="image-title-wrap">
-                                                            <button type="button" onclick="removeUpload()" class="remove-image">
+                                                            <button type="button"
+                                                                    onclick="removeUpload()"
+                                                                    class="remove-image">
                                                                 <i class="fa fa-times nav-icon" aria-hidden="true"></i>
                                                             </button>
                                                         </div>
@@ -152,8 +188,14 @@
                                                 <div class="upload__box">
                                                     <div class="upload__btn-box">
                                                         <label class="upload__btn">
-                                                            <span><i class="fa fa-upload mr-2" aria-hidden="true"></i>TẢI HÌNH ẢNH</span>
-                                                            <input type="file" multiple data-max_length="20" name="image_path[]"
+                                                            <span>
+                                                                <i class="fa fa-upload mr-2" aria-hidden="true"></i>
+                                                                TẢI HÌNH ẢNH
+                                                            </span>
+                                                            <input type="file"
+                                                                   multiple
+                                                                   data-max_length="20"
+                                                                   name="image_path[]"
                                                                    class="upload__inputfile form-control-file"
                                                                    id="feature_image_path_multiple">
                                                         </label>
@@ -163,7 +205,8 @@
                                                             <div class='upload__img-box'>
                                                                 <div style='background-image:url("{{ $productImage->image_path }}")'
                                                                      data-number="{{ $loop->index + 1 }}"
-                                                                     data-file="{{ $productImage->image_name }}" class='img-bg'>
+                                                                     data-file="{{ $productImage->image_name }}"
+                                                                     class='img-bg'>
                                                                     <div class='upload__img-close'></div>
                                                                 </div>
                                                             </div>

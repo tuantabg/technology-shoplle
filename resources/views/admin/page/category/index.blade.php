@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         @if(session()->has('message'))
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert alert-success alert-default-success" role="alert">
                                 {{ session()->get('message') }}
                             </div>
                         @endif
