@@ -94,9 +94,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
+                            <a href="{{ route('sliders.index') }}" class="nav-link {{
+                                request()->is('admin/sliders') ||
+                                request()->is('admin/sliders/create') ||
+                                request()->is('admin/sliders/edit/*') ? 'active' : ''
+                            }}">
+                                <i class="nav-icon fas fa-images"></i>
+                                <p>Slider</p>
                             </a>
                         </li>
                     </ul>

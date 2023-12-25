@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
 
         Route::post('/store', [MenuController::class, 'store'])->name('menus.store');
         Route::post('/update/{id}', [MenuController::class, 'update'])->name('menus.update');
+    });
+
+    // Route menus
+    Route::prefix('sliders')->group(function () {
+        Route::get('/', [SliderController::class, 'index'])->name('sliders.index');
+        Route::get('/create', [SliderController::class, 'create'])->name('sliders.create');
+        Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('sliders.edit');
+        Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('sliders.delete');
+
+        Route::post('/store', [SliderController::class, 'store'])->name('sliders.store');
+        Route::post('/update/{id}', [SliderController::class, 'update'])->name('sliders.update');
     });
 
     // Route categories
