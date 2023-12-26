@@ -24,32 +24,34 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Tên menu</th>
-                                        <th scope="col">Slug</th>
+                                        <th scope="col">image</th>
                                         <th class="text-right" scope="col">Tác vụ</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-{{--                                    @foreach($menus as $key => $menu)--}}
-{{--                                        <tr>--}}
-{{--                                            <th scope="row">{{ $loop->index + 1 }}</th>--}}
-{{--                                            <td>{{ $menu->name }}</td>--}}
-{{--                                            <td>{{ $menu->slug }}</td>--}}
-{{--                                            <td class="text-right">--}}
-{{--                                                <a href="{{ route('menus.edit', ['id' => $menu->id]) }}" class="btn btn-primary btn-sm">--}}
-{{--                                                    <i class="fa fa-edit" aria-hidden="true"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a href="{{ route('menus.delete', ['id' => $menu->id]) }}"  class="btn btn-danger btn-sm">--}}
-{{--                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>--}}
-{{--                                                </a>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
+                                    @foreach($sliders as $key => $slider)
+                                        <tr>
+                                            <th scope="row">{{ $loop->index + 1 }}</th>
+                                            <td>{{ $slider->name }}</td>
+                                            <td><img src="{{ $product->image_path }}" alt="{{ $product->image_path }}" width="150px"/></td>
+                                            <td class="text-right">
+                                                <a href="{{ route('menus.edit', ['id' => $slider->id]) }}"
+                                                    class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="{{ route('menus.delete', ['id' => $slider->id]) }}"
+                                                    class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-{{--                        {{ $menus->links() }}--}}
+                        {{ $sliders->links() }}
                     </div>
                     <!-- /.col-md-6 -->
                 </div>

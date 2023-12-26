@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
         Route::post('/update/{id}', [MenuController::class, 'update'])->name('menus.update');
     });
 
-    // Route menus
+    // Route sliders
     Route::prefix('sliders')->group(function () {
         Route::get('/', [SliderController::class, 'index'])->name('sliders.index');
         Route::get('/create', [SliderController::class, 'create'])->name('sliders.create');

@@ -60,7 +60,7 @@
                                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                                     <td>{{ $product->product_code }}</td>
                                                     <td>{{ $product->name }}</td>
-                                                    <td><img src="{{ $product->feature_image_path }}" alt="{{ $product->feature_image_name }}" width="50px"></td>
+                                                    <td><img src="{{ $product->feature_image_path }}" alt="{{ $product->feature_image_name }}" width="50px"/></td>
                                                     <td>
                                                         @if(!$product->discount)
                                                             <p class="m-0 font-weight-bold">{{ number_format($product->price) }}</p>

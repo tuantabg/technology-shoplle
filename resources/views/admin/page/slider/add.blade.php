@@ -1,5 +1,9 @@
 @extends('admin.layout')
 @section('title', 'Thêm Mới slider')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('common/common.css') }}">
+@endsection
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -10,28 +14,50 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-7 col-md-7 col-sm-12">
                         <div class="card">
                             <!-- form start -->
-                            <form action="{{ route('sliders.store') }}" method="post">
+                            <form action="{{ route('sliders.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name_menu">Tên Menu</label>
+                                        <label for="name_menu">Tiêu đề</label>
                                         <input type="text" class="form-control"
                                                id="name_menu" name="name" placeholder="Tên menu"
-                                               onkeyup="ChangeToSlug();">
-                                        <label class="d-flex align-items-center"><small>Slug:</small>
-                                            <input type="text" class="form-control form-control-border form-control-sm bg-white border-bottom-0"
-                                                   id="slug_menu" name="slug" placeholder="slug-name" readonly="readonly">
-                                        </label>
+                                               value="{{ old('name') }}"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="parent_id">Chọn menu cha</label>
-                                        <select class="custom-select" name="parent_id" id="parent_id">
-                                            <option value="0">Menu cha</option>
-{{--                                            {!! $htmlOption !!}--}}
-                                        </select>
+                                        <label for="image_url">URL</label>
+                                        <input type="text" class="form-control"
+                                               id="image_url" name="image_url"
+                                               value="{{ old('image_url') }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image_description">Mô tả</label>
+                                        <textarea id="image_description"
+                                                  class="form-control description-editor"
+                                                  name="description">{{ old('description') }}
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="upload">Hình Ảnh</label>
+                                        <div id="image_upload_file" class="input-group mb-3 bg-white">
+                                            <input id="upload" type="file" onchange="readURL(this);"
+                                                   class="form-control border-0" name="image_path">
+                                            <label id="upload-label" for="upload"
+                                                   class="font-weight-light text-muted">Tải hình ảnh
+                                            </label>
+                                            <div class="input-group-append">
+                                                <label for="upload" class="btn btn-light m-0 px-4">
+                                                    <i class="fa fa-cloud-upload mr-2 text-muted"></i>
+                                                    <small class="text-uppercase font-weight-bold text-muted">Chọn tập tin</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="image-area">
+                                            <img id="imageResult" src="#" alt=""
+                                                 class="img-fluid rounded shadow-sm mx-auto d-block" />
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -53,40 +79,7 @@
 
 @endsection
 @section('javascript')
-    <script language="javascript">
-        function ChangeToSlug()
-        {
-            var title, slug;
-
-            //Lấy text từ thẻ input name
-            title = document.getElementById("name_menu").value;
-
-            //Đổi chữ hoa thành chữ thường
-            slug = title.toLowerCase();
-
-            //Đổi ký tự có dấu thành không dấu
-            slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
-            slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
-            slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
-            slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
-            slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
-            slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
-            slug = slug.replace(/đ/gi, 'd');
-            //Xóa các ký tự đặt biệt
-            slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-            //Đổi khoảng trắng thành ký tự gạch ngang
-            slug = slug.replace(/ /gi, "-");
-            //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-            //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
-            slug = slug.replace(/\-\-\-\-\-/gi, '-');
-            slug = slug.replace(/\-\-\-\-/gi, '-');
-            slug = slug.replace(/\-\-\-/gi, '-');
-            slug = slug.replace(/\-\-/gi, '-');
-            //Xóa các ký tự gạch ngang ở đầu và cuối
-            slug = '@' + slug + '@';
-            slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-            //In slug ra textbox có id “slug”
-            document.getElementById('slug_menu').value = slug;
-        }
-    </script>
+    <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('common/summernote/summernote.js') }}"></script>
+    <script src="{{ asset('common/imageUploadFile/image_upload_file.js') }}"></script>
 @endsection

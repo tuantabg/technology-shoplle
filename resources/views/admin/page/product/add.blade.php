@@ -220,5 +220,6 @@
 @section('javascript')
     <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('common/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('common/summernote/summernote.js') }}"></script>
     <script src="{{ asset('common/common.js') }}"></script>
 @endsection
