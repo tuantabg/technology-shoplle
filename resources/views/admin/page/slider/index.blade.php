@@ -1,5 +1,8 @@
 @extends('admin.layout')
 @section('title', 'Slider')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('common/common.css') }}">
+@endsection
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -23,25 +26,33 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col" width="10%">Hình ảnh</th>
                                         <th scope="col">Tên menu</th>
-                                        <th scope="col">image</th>
+                                        <th scope="col">Url</th>
+                                        <th scope="col">description</th>
                                         <th class="text-right" scope="col">Tác vụ</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($sliders as $key => $slider)
                                         <tr>
-                                            <th scope="row">{{ $loop->index + 1 }}</th>
-                                            <td>{{ $slider->name }}</td>
-                                            <td><img src="{{ $product->image_path }}" alt="{{ $product->image_path }}" width="150px"/></td>
-                                            <td class="text-right">
-                                                <a href="{{ route('menus.edit', ['id' => $slider->id]) }}"
+                                            <th class="align-middle" scope="row">{{ $loop->index + 1 }}</th>
+                                            <td class="align-middle">
+                                                <img src="{{ $slider->image_path }}"
+                                                     alt="{{ $slider->image_path }}"
+                                                     width="200px"/>
+                                            </td>
+                                            <td class="align-middle">{{ $slider->name }}</td>
+                                            <td class="align-middle">{{ $slider->image_url }}</td>
+                                            <td class="align-middle">{!! $slider->description !!}</td>
+                                            <td class="align-middle text-right">
+                                                <a href="{{ route('sliders.edit', ['id' => $slider->id]) }}"
                                                     class="btn btn-primary btn-sm">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </a>
-                                                <a href="{{ route('menus.delete', ['id' => $slider->id]) }}"
-                                                    class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                <a href="{{ route('sliders.delete', ['id' => $slider->id]) }}"
+                                                   class="btn btn-danger btn-fix btn-sm">
+                                                   <i class="fa fa-trash-alt" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -64,12 +75,5 @@
 
 @endsection
 @section('javascript')
-    <script language="javascript">
-        $(document).ready(function() {
-            // show the alert
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 2000);
-        });
-    </script>
+    <script src="{{ asset('common/alertSetTimeout.js') }}"></script>
 @endsection

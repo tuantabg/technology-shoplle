@@ -25,7 +25,7 @@ class SliderRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|min:3',
-            'image_path' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -36,6 +36,7 @@ class SliderRequest extends FormRequest
             'name.unique' => 'Tên không để trùng',
             'name.max' => 'Tên không điền quán 255 ký tự',
             'name.min' => 'Tên không điền dưới 10 ký tự',
+            'image_path.required' => 'Hình ảnh không để trống',
             'image_path.image' => 'Loại tệp được tải lên phải là hình ảnh.',
             'image_path.uploaded' => 'Không tải được hình ảnh lên. Kích thước tối đa của hình ảnh là 2MB.',
         ];

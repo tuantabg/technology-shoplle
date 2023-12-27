@@ -22,9 +22,12 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name_menu">Tiêu đề</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                id="name_menu" name="name" placeholder="Tên menu"
                                                value="{{ old('name') }}"/>
+                                        @error('name')
+                                        <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="image_url">URL</label>
@@ -41,7 +44,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="upload">Hình Ảnh</label>
-                                        <div id="image_upload_file" class="input-group mb-3 bg-white">
+                                        <div id="image_upload_file" class="input-group bg-white @error('image_path') border-danger @enderror">
                                             <input id="upload" type="file" onchange="readURL(this);"
                                                    class="form-control border-0" name="image_path">
                                             <label id="upload-label" for="upload"
@@ -54,7 +57,10 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="image-area">
+                                        @error('image_path')
+                                        <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-area mt-3">
                                             <img id="imageResult" src="#" alt=""
                                                  class="img-fluid rounded shadow-sm mx-auto d-block" />
                                         </div>
@@ -82,4 +88,5 @@
     <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('common/summernote/summernote.js') }}"></script>
     <script src="{{ asset('common/imageUploadFile/image_upload_file.js') }}"></script>
+    <script src="{{ asset('common/alertSetTimeout.js') }}"></script>
 @endsection

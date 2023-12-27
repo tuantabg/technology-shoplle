@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\SliderRequest;
+use App\Slider;
 use Illuminate\Http\Request;
+use App\Http\Requests\SliderRequest;
 use App\Http\Controllers\Controller;
+use App\Traits\StorageImageTrait;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SliderController extends Controller
 {
+    use StorageImageTrait;
+
     private $slider;
 
     public function __construct(Slider $slider)
@@ -29,22 +35,65 @@ class SliderController extends Controller
 
     public function store(SliderRequest $request)
     {
-        $this->slider->create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'image_url' => $request->input('image_url'),
-        ]);
+        try {
+            $sliderInsert = [
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'image_url' => $request->input('image_url'),
+            ];
 
-        // Image Upload file
-        $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'products');
-        if (!empty($dataUploadFeatureImage)) {
-            $dataProductCreate['feature_image_name'] = $dataUploadFeatureImage['file_name'];
-            $dataProductCreate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
+            // Upload Image Sliders
+            $dataImageSlider = $this->storageTraitUpload($request, 'image_path', 'slider');
+            if (!empty($dataImageSlider)) {
+                $sliderInsert['image_name'] = $dataImageSlider['file_name'];
+                $sliderInsert['image_path'] = $dataImageSlider['file_path'];
+            }
+
+            $this->slider->create($sliderInsert);
+
+            return redirect()->route('sliders.index')->with('message','Thêm slider thành công');
+
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
         }
-        $product = $this->product->create($dataProductCreate);
+    }
 
-        return redirect()
-            ->route('menus.index')
-            ->with('message','Thêm menu thành công');
+    public function edit($id)
+    {
+        $slider = $this->slider->find($id);
+
+        return view('admin.page.slider.edit', compact('slider'));
+    }
+
+    public function update($id, Request $request)
+    {
+        try {
+            $sliderUpdate = [
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'image_url' => $request->input('image_url'),
+            ];
+
+            // Upload Image Sliders
+            $dataImageSlider = $this->storageTraitUpload($request, 'image_path', 'slider');
+            if (!empty($dataImageSlider)) {
+                $sliderUpdate['image_name'] = $dataImageSlider['file_name'];
+                $sliderUpdate['image_path'] = $dataImageSlider['file_path'];
+            }
+
+            $this->slider->find($id)->update($sliderUpdate);
+
+            return redirect()->route('sliders.index')->with('message','Cập nhập slider thành công');
+
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+        }
+    }
+
+    public function delete($id)
+    {
+        $this->slider->find($id)->delete();
+
+        return redirect()->route('sliders.index');
     }
 }

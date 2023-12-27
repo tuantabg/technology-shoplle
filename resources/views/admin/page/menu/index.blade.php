@@ -62,12 +62,5 @@
 
 @endsection
 @section('javascript')
-    <script language="javascript">
-        $(document).ready(function() {
-            // show the alert
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 2000);
-        });
-    </script>
+    <script src="{{ asset('common/alertSetTimeout.js') }}"></script>
 @endsection
