@@ -55,6 +55,7 @@ class SliderController extends Controller
 
         } catch (\Exception $exception) {
             Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return redirect()->back()->with('message','Thêm slider không thành công');
         }
     }
 
@@ -87,6 +88,7 @@ class SliderController extends Controller
 
         } catch (\Exception $exception) {
             Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return redirect()->back()->with('message','Cập nhập slider không thành công');
         }
     }
 

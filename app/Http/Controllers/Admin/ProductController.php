@@ -108,6 +108,7 @@ class ProductController extends Controller
             DB::rollBack();
 
             Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return redirect()->back()->with('message','Thêm sản phẩm không thành công');
         }
     }
 
@@ -174,6 +175,7 @@ class ProductController extends Controller
             DB::rollBack();
 
             Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return redirect()->back()->with('message','Cập nhập sản phẩm không thành công');
         }
     }
 
