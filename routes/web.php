@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\InformationController;
+use App\Http\Controllers\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,28 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
 
         Route::post('/store', [SliderController::class, 'store'])->name('sliders.store');
         Route::post('/update/{id}', [SliderController::class, 'update'])->name('sliders.update');
+    });
+
+    // Route Information
+    Route::prefix('information')->group(function () {
+        Route::get('/', [InformationController::class, 'index'])->name('information.index');
+        Route::get('/create', [InformationController::class, 'create'])->name('information.create');
+        Route::get('/edit/{id}', [InformationController::class, 'edit'])->name('information.edit');
+        Route::get('/delete/{id}', [InformationController::class, 'delete'])->name('information.delete');
+
+        Route::post('/store', [InformationController::class, 'store'])->name('information.store');
+        Route::post('/update/{id}', [InformationController::class, 'update'])->name('information.update');
+    });
+
+    // Route Setting
+    Route::prefix('settings')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('settings.index');
+        Route::get('/create', [SettingController::class, 'create'])->name('settings.create');
+        Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('settings.edit');
+        Route::get('/delete/{id}', [SettingController::class, 'delete'])->name('settings.delete');
+
+        Route::post('/store', [SettingController::class, 'store'])->name('settings.store');
+        Route::post('/update/{id}', [SettingController::class, 'update'])->name('settings.update');
     });
 
     // Route categories

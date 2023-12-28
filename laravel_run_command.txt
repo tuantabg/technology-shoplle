@@ -1,0 +1,5 @@
+1/ Chay sever
+    php artisan serve
+2/ Lenh chay database seed
+    php artisan migrate:fresh --seed
+3/

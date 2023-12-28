@@ -50,10 +50,11 @@
                                                     class="btn btn-primary btn-sm">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </a>
-                                                <a href="{{ route('sliders.delete', ['id' => $slider->id]) }}"
-                                                   class="btn btn-danger btn-fix btn-sm">
-                                                   <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                </a>
+                                                <button
+                                                    data-url="{{ route('sliders.delete', ['id' => $slider->id]) }}"
+                                                    class="btn btn-danger btn-sm action-delete">
+                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -75,5 +76,7 @@
 
 @endsection
 @section('javascript')
+    <script src="{{ asset('common/sweetalert2/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('common/sweetalert2/configSweetAlert2.js') }}"></script>
     <script src="{{ asset('common/alertSetTimeout.js') }}"></script>
 @endsection

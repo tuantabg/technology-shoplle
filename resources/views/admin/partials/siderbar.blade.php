@@ -13,7 +13,7 @@
                 <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ route('dashboard') }}" class="d-block">Alexander Pierce</a>
+                <a href="{{ route('dashboard') }}" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -27,20 +27,20 @@
                     </a>
                 </li>
                 <li class="nav-item {{
-                        request()->is('admin/categories') ||
+                        request()->is('admin/categories')        ||
                         request()->is('admin/categories/create') ||
                         request()->is('admin/categories/edit/*') ||
-                        request()->is('admin/products') ||
-                        request()->is('admin/products/create') ||
-                        request()->is('admin/products/edit/*') ? 'menu-open' : ''
+                        request()->is('admin/products')          ||
+                        request()->is('admin/products/create')   ||
+                        request()->is('admin/products/edit/*')   ? 'menu-open' : ''
                     }}">
                     <a href="#" class="nav-link {{
                         request()->is('admin/categories') ||
                         request()->is('admin/categories/create') ||
                         request()->is('admin/categories/edit/*') ||
-                        request()->is('admin/products') ||
-                        request()->is('admin/products/create') ||
-                        request()->is('admin/products/edit/*') ? 'active' : ''
+                        request()->is('admin/products')          ||
+                        request()->is('admin/products/create')   ||
+                        request()->is('admin/products/edit/*')   ? 'active' : ''
                     }}">
                         <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
                         <p>Danh mục <i class="right fas fa-angle-left"></i></p>
@@ -48,7 +48,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('products.index') }}" class="nav-link {{
-                                request()->is('admin/products') ||
+                                request()->is('admin/products')        ||
                                 request()->is('admin/products/create') ||
                                 request()->is('admin/products/edit/*') ? 'active' : ''
                             }}">
@@ -58,7 +58,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link {{
-                                request()->is('admin/categories') ||
+                                request()->is('admin/categories')        ||
                                 request()->is('admin/categories/create') ||
                                 request()->is('admin/categories/edit/*') ? 'active' : ''
                             }}">
@@ -70,14 +70,32 @@
                 </li>
 
                 <li class="nav-item {{
-                        request()->is('admin/menus') ||
-                        request()->is('admin/menus/create') ||
-                        request()->is('admin/menus/edit/*') ? 'menu-open' : ''
+                        request()->is('admin/menus')                ||
+                        request()->is('admin/menus/create')         ||
+                        request()->is('admin/menus/edit/*')         ||
+                        request()->is('admin/sliders')              ||
+                        request()->is('admin/sliders/create')       ||
+                        request()->is('admin/sliders/edit/*')       ||
+                        request()->is('admin/information')          ||
+                        request()->is('admin/information/create')   ||
+                        request()->is('admin/information/edit/*')   ||
+                        request()->is('admin/settings')             ||
+                        request()->is('admin/settings/create')      ||
+                        request()->is('admin/settings/edit/*')      ? 'menu-open' : ''
                     }}">
                     <a href="#" class="nav-link {{
-                        request()->is('admin/menus') ||
-                        request()->is('admin/menus/create') ||
-                        request()->is('admin/menus/edit/*') ? 'active' : ''
+                        request()->is('admin/menus')                ||
+                        request()->is('admin/menus/create')         ||
+                        request()->is('admin/menus/edit/*')         ||
+                        request()->is('admin/sliders')              ||
+                        request()->is('admin/sliders/create')       ||
+                        request()->is('admin/sliders/edit/*')       ||
+                        request()->is('admin/information')          ||
+                        request()->is('admin/information/create')   ||
+                        request()->is('admin/information/edit/*')   ||
+                        request()->is('admin/settings')             ||
+                        request()->is('admin/settings/create')      ||
+                        request()->is('admin/settings/edit/*')      ? 'active' : ''
                     }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Cài đặt <i class="right fas fa-angle-left"></i></p>
@@ -85,22 +103,42 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item"> <!-- menu-open -->
                             <a href="{{ route('menus.index') }}" class="nav-link {{
-                                request()->is('admin/menus') ||
+                                request()->is('admin/menus')        ||
                                 request()->is('admin/menus/create') ||
                                 request()->is('admin/menus/edit/*') ? 'active' : ''
                             }}">
                                 <i class="nav-icon fas fa-bars"></i>
-                                <p>Danh sách menu</p>
+                                <p>Menu</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('sliders.index') }}" class="nav-link {{
-                                request()->is('admin/sliders') ||
+                                request()->is('admin/sliders')        ||
                                 request()->is('admin/sliders/create') ||
                                 request()->is('admin/sliders/edit/*') ? 'active' : ''
                             }}">
                                 <i class="nav-icon fas fa-images"></i>
                                 <p>Slider</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('information.create') }}" class="nav-link {{
+                                request()->is('admin/information')        ||
+                                request()->is('admin/information/create') ||
+                                request()->is('admin/information/edit/*') ? 'active' : ''
+                            }}">
+                                <i class="nav-icon fas fa-info-circle"></i>
+                                <p>Thông tin WEB</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('settings.index') }}" class="nav-link {{
+                                request()->is('admin/settings')        ||
+                                request()->is('admin/settings/create') ||
+                                request()->is('admin/settings/edit/*') ? 'active' : ''
+                            }}">
+                                <i class="nav-icon fas fa-cogs"></i>
+                                <p>Cài Đặt</p>
                             </a>
                         </li>
                     </ul>

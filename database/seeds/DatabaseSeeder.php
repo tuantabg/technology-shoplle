@@ -14,10 +14,77 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
 
-        DB::table('users')->insert([
-            'name' => 'tuanta',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('123456'),
-        ]);
+        $dataUsers = [
+            [
+                'name'      => 'tuanta',
+                'email'     => 'admin@gmail.com',
+                'password'  => bcrypt('123456'),
+            ],
+        ];
+
+        $dataMenus = [
+            [
+                'name'      => 'Iphone',
+                'parent_id'     => 0,
+                'slug'  => 'iphone',
+            ],
+            [
+                'name'      => 'Samsung',
+                'parent_id'     => 0,
+                'slug'  => 'samsung',
+            ],
+            [
+                'name'      => 'Redmi',
+                'parent_id'     => 0,
+                'slug'  => 'redmi',
+            ],
+        ];
+
+        $dataCategories = [
+            [
+                'name'      => 'Iphone',
+                'parent_id'     => 0,
+                'slug'  => 'iphone',
+            ],
+            [
+                'name'      => 'Samsung',
+                'parent_id'     => 0,
+                'slug'  => 'samsung',
+            ],
+            [
+                'name'      => 'Redmi',
+                'parent_id'     => 0,
+                'slug'  => 'redmi',
+            ],
+        ];
+
+        $dataSliders = [
+            [
+                'name'          => 'Slider1',
+                'description'   => 'Slider1',
+                'image_url'     => 'Slider1',
+                'image_name'    => 'how-to-make-a-banner-header-wide.png',
+                'image_path'    => '/storage/slider/1/QDdoN0fJsilI5978FI2G.png',
+            ],
+            [
+                'name'          => 'Slider1',
+                'description'   => 'Slider1',
+                'image_url'     => 'Slider1',
+                'image_name'    => 'how-to-make-a-banner-header-wide.png',
+                'image_path'    => '/storage/slider/1/QDdoN0fJsilI5978FI2G.png',
+            ],
+            [
+                'name'          => 'Slider1',
+                'description'   => 'Slider1',
+                'image_url'     => 'Slider1',
+                'image_name'    => 'how-to-make-a-banner-header-wide.png',
+                'image_path'    => '/storage/slider/1/QDdoN0fJsilI5978FI2G.png',
+            ],
+        ];
+
+        DB::table('users')->insert($dataUsers);
+        DB::table('menus')->insert($dataMenus);
+        DB::table('categories')->insert($dataCategories);
+        DB::table('sliders')->insert($dataSliders);
     }
 }
