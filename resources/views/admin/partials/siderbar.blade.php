@@ -122,16 +122,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('information.create') }}" class="nav-link {{
-                                request()->is('admin/information')        ||
-                                request()->is('admin/information/create') ||
-                                request()->is('admin/information/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="nav-icon fas fa-info-circle"></i>
-                                <p>Thông tin WEB</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('settings.index') }}" class="nav-link {{
                                 request()->is('admin/settings')        ||
                                 request()->is('admin/settings/create') ||
