@@ -28,7 +28,7 @@
                                                placeholder="Nhập config key"
                                                value="{{ $setting->config_key }}">
                                         @error('config_key')
-                                        <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                        <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                         @enderror
                                     </div>
 
@@ -42,7 +42,7 @@
                                                    placeholder="Nhập config value"
                                                    value="{{ $setting->config_value }}">
                                             @error('config_value')
-                                            <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                            <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     @elseif(request()->type === 'Textarea')
@@ -54,7 +54,7 @@
                                                       {!! $setting->config_value !!}
                                             </textarea>
                                             @error('config_value')
-                                            <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                            <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     @endif

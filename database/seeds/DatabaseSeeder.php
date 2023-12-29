@@ -82,9 +82,28 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        $dataSettings = [
+            [
+                'config_key'    => 'email',
+                'config_value'  => 'admin@gmail.com',
+                'type'          => 'Text',
+            ],
+            [
+                'config_key'    => 'phone',
+                'config_value'  => '0123456789',
+                'type'          => 'Text',
+            ],
+            [
+                'config_key'    => 'Text',
+                'config_value'  => 'Copyright © 2011-2023 Laravel LLC.',
+                'type'          => 'Textarea',
+            ],
+        ];
+
         DB::table('users')->insert($dataUsers);
         DB::table('menus')->insert($dataMenus);
         DB::table('categories')->insert($dataCategories);
         DB::table('sliders')->insert($dataSliders);
+        DB::table('settings')->insert($dataSettings);
     }
 }

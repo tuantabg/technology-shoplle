@@ -18,13 +18,16 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name_category">Tên danh mục</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                id="name_category" name="name" placeholder="Tên danh mục" value="{{ $category->name }}"
                                                onkeyup="ChangeToSlug();">
                                         <label class="d-flex align-items-center"><small>Slug:</small>
                                             <input type="text" class="form-control form-control-border form-control-sm bg-white border-bottom-0"
                                                    id="slug_category" name="slug" placeholder="slug-name" value="{{ $category->slug }}" readonly="readonly">
                                         </label>
+                                        @error('name')
+                                        <div class="alert alert-default-danger mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="parent_id">Chọn danh mục cha</label>

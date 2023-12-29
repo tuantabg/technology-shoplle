@@ -31,7 +31,7 @@
                                                        placeholder="Tên menu"
                                                        value="{{ old('name') }}">
                                                 @error('name')
-                                                <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                                <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                                 @enderror
                                             </div>
 
@@ -87,7 +87,7 @@
                                                                            name="price"
                                                                            value="{{ old('price') }}"/>
                                                                     @error('price')
-                                                                    <div class="alert alert-danger alert-default-danger" style="margin: .25rem 1rem 0">{{ $message }}</div>
+                                                                    <div class="alert alert-default-danger" style="margin: .25rem 1rem 0">{{ $message }}</div>
                                                                     @enderror
                                                                 </div>
                                                             </div>
@@ -145,7 +145,7 @@
                                                     {!! $htmlOption !!}
                                                 </select>
                                                 @error('category_id')
-                                                <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                                <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">

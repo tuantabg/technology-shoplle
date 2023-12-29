@@ -26,7 +26,7 @@
                                                id="name_menu" name="name" placeholder="Tên menu"
                                                value="{{ old('name') }}"/>
                                         @error('name')
-                                        <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                        <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
@@ -58,7 +58,7 @@
                                             </div>
                                         </div>
                                         @error('image_path')
-                                        <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                        <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                         @enderror
                                         <div class="image-area mt-3">
                                             <img id="imageResult" src="#" alt=""

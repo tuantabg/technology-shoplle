@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Components\Recusive;
@@ -32,7 +33,7 @@ class CategoryController extends Controller
         return view('admin.page.category.add', compact('htmlOption'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $this->category->create([
             'name' => $request->input('name'),

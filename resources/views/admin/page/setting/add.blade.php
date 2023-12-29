@@ -24,11 +24,20 @@
                                         <input type="text"
                                                class="form-control @error('config_key') is-invalid @enderror"
                                                id="config_key"
-                                               name="config_key"
                                                placeholder="Nhập config key"
-                                               value="{{ old('config_key') }}">
+                                               value="{{ old('config_key') }}"
+                                               onkeyup="ChangeToConfigkey();">
+                                        <label class="d-flex align-items-center"><small>Slug:</small>
+                                            <input class="form-control form-control-border form-control-sm bg-white border-bottom-0"
+                                                   id="change_to_config_key"
+                                                   type="text"
+                                                   name="config_key"
+                                                   placeholder="config_key"
+                                                   readonly="readonly"
+                                                   value="{{ old('config_key') }}">
+                                        </label>
                                         @error('config_key')
-                                            <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                            <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                         @enderror
                                     </div>
 
@@ -42,7 +51,7 @@
                                                    placeholder="Nhập config value"
                                                    value="{{ old('config_value') }}">
                                             @error('config_value')
-                                                <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                                <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     @elseif(request()->type === 'Textarea')
@@ -54,7 +63,7 @@
                                                       {{ old('config_value') }}
                                             </textarea>
                                             @error('config_value')
-                                                <div class="alert alert-danger alert-default-danger mt-1">{{ $message }}</div>
+                                                <div class="alert alert-default-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     @endif
@@ -80,4 +89,5 @@
 @section('javascript')
     <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('common/summernote/summernote.js') }}"></script>
+    <script language="javascript" src="{{ asset('common/ChangeToSlug.js') }}"></script>
 @endsection
