@@ -19,7 +19,16 @@ class DatabaseSeeder extends Seeder
                 'name'      => 'tuanta',
                 'email'     => 'admin@gmail.com',
                 'password'  => bcrypt('123456'),
+                'feature_image_name' => '',
+                'feature_image_path' => ''
             ],
+        ];
+
+        $dataRoles = [
+            ['name' => 'Admin', 'display_name' => 'Quản trị hệ thống'],
+            ['name' => 'Guest', 'display_name' => 'Khách Hàng'],
+            ['name' => 'Developer', 'display_name' => 'Phát triển hệ thống'],
+            ['name' => 'Posting Staff', 'display_name' => 'Nhân viên đăng bài']
         ];
 
         $dataMenus = [
@@ -101,6 +110,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('users')->insert($dataUsers);
+        DB::table('roles')->insert($dataRoles);
         DB::table('menus')->insert($dataMenus);
         DB::table('categories')->insert($dataCategories);
         DB::table('sliders')->insert($dataSliders);

@@ -5,8 +5,10 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\InformationController;
+//use App\Http\Controllers\Admin\InformationController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,14 +53,40 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     });
 
     // Route Information
-    Route::prefix('information')->group(function () {
-        Route::get('/', [InformationController::class, 'index'])->name('information.index');
-        Route::get('/create', [InformationController::class, 'create'])->name('information.create');
-        Route::get('/edit/{id}', [InformationController::class, 'edit'])->name('information.edit');
-        Route::get('/delete/{id}', [InformationController::class, 'delete'])->name('information.delete');
+//    Route::prefix('information')->group(function () {
+//        Route::get('/', [InformationController::class, 'index'])->name('information.index');
+//        Route::get('/create', [InformationController::class, 'create'])->name('information.create');
+//        Route::get('/edit/{id}', [InformationController::class, 'edit'])->name('information.edit');
+//        Route::get('/delete/{id}', [InformationController::class, 'delete'])->name('information.delete');
+//
+//        Route::post('/store', [InformationController::class, 'store'])->name('information.store');
+//        Route::post('/update/{id}', [InformationController::class, 'update'])->name('information.update');
+//    });
 
-        Route::post('/store', [InformationController::class, 'store'])->name('information.store');
-        Route::post('/update/{id}', [InformationController::class, 'update'])->name('information.update');
+    // Route user
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+        Route::get('/delete/permanently/{id}', [UserController::class, 'deletePermanently'])->name('users.delete.permanently');
+        Route::get('/delete/recover/{id}', [UserController::class, 'deleteRecover'])->name('users.delete.recover');
+
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+    });
+
+    // Route role
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index'])->name('roles.index');
+        Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+        Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('roles.delete');
+        Route::get('/delete/permanently/{id}', [RoleController::class, 'deletePermanently'])->name('roles.delete.permanently');
+        Route::get('/delete/recover/{id}', [RoleController::class, 'deleteRecover'])->name('roles.delete.recover');
+
+        Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
+        Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
     });
 
     // Route Setting

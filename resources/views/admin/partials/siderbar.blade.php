@@ -133,6 +133,48 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item {{
+                        request()->is('admin/users')                ||
+                        request()->is('admin/users/create')         ||
+                        request()->is('admin/users/edit/*')         ||
+                        request()->is('admin/roles')                ||
+                        request()->is('admin/roles/create')         ||
+                        request()->is('admin/roles/edit/*')         ? 'menu-open' : ''
+                    }}">
+                    <a href="#" class="nav-link {{
+                        request()->is('admin/users')                ||
+                        request()->is('admin/users/create')         ||
+                        request()->is('admin/users/edit/*')         ||
+                        request()->is('admin/roles')                ||
+                        request()->is('admin/roles/create')         ||
+                        request()->is('admin/roles/edit/*')         ? 'active' : ''
+                    }}">
+                        <i class="nav-icon fas fa-address-book"></i>
+                        <p>Quản Lý Tài Khoản <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link {{
+                                request()->is('admin/users')        ||
+                                request()->is('admin/users/create') ||
+                                request()->is('admin/users/edit/*') ? 'active' : ''
+                            }}">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Danh sách nhân viên</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('roles.index') }}" class="nav-link {{
+                                request()->is('admin/roles')        ||
+                                request()->is('admin/roles/create') ||
+                                request()->is('admin/roles/edit/*') ? 'active' : ''
+                            }}">
+                                <i class="nav-icon fas fa-sitemap"></i>
+                                <p>Vai trò (Role)</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

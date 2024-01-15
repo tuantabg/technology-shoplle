@@ -2,4 +2,5 @@
     php artisan serve
 2/ Lenh chay database seed
     php artisan migrate:fresh --seed
-3/
+3/ Lenh storage link image
+    php artisan storage:link

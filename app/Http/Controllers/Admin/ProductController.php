@@ -169,7 +169,7 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect()->route('products.index')->with('message','Sửa sản phẩm thành công');
+            return redirect()->route('products.index')->with('message','Cập nhập sản phẩm thành công');
 
         } catch (\Exception $exception) {
             DB::rollBack();
