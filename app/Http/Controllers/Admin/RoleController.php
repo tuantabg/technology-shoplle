@@ -21,4 +21,6 @@ class RoleController extends Controller
 
         return view('admin.page.role.index', compact('roles'));
     }
+
+    // đang làm
 }
