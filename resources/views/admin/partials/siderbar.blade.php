@@ -160,7 +160,7 @@
                                 request()->is('admin/users/edit/*') ? 'active' : ''
                             }}">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p>Danh sách nhân viên</p>
+                                <p>Danh sách tài khoản</p>
                             </a>
                         </li>
                         <li class="nav-item">
