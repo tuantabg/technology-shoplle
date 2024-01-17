@@ -11,32 +11,66 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card">
+
                             <!-- form start -->
                             <form action="{{ route('roles.update', ['id' => $role->id]) }}" method="post">
                                 @csrf
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="name_role">Tên Menu</label>
-                                        <input type="text" class="form-control"
-                                               id="name_role" name="name"
-                                               placeholder="Tên vai trò"
-                                               value="{{ $role->name }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="display_name">Mô tả</label>
-                                        <textarea id="display_name"
-                                                  class="form-control description-editor"
-                                                  name="display_name">{{ $role->display_name }}</textarea>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="name_role">Tên Menu</label>
+                                            <input type="text" class="form-control"
+                                                   id="name_role" name="name"
+                                                   placeholder="Tên vai trò"
+                                                   value="{{ $role->name }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="display_name">Mô tả</label>
+                                            <textarea id="display_name"
+                                                      class="form-control description-editor"
+                                                      name="display_name">{{ $role->display_name }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- /.card-body -->
 
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+                                @foreach($permissionsParent as $key => $permissionParentItem )
+                                    <div class="card border-primary">
+                                        <div class="card-body">
+                                            <div class="card-header row">
+                                                <div class="form-group form-check mb-0">
+                                                    <input type="checkbox"
+                                                           class="form-check-input checkbox-wrapper cursor-pointer"
+                                                           id="module_check_{{ $permissionParentItem->id }}"
+                                                           {{ $permissionsChecked->contains('id', $permissionParentItem->id) ? 'checked' : '' }}>
+                                                    <label class="form-check-label cursor-pointer"
+                                                           for="module_check_{{ $permissionParentItem->id }}">
+                                                        Module {{ $permissionParentItem->display_name }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="card-body text-primary row">
+                                                @foreach($permissionParentItem->permissionsChildrent as $permissionsChildrentItem )
+                                                    <div class="form-group form-check col-md-3">
+                                                        <input type="checkbox"
+                                                               name="permission_id[]"
+                                                               class="form-check-input checkbox-childrent cursor-pointer"
+                                                               id="permission_childrent_item_{{ $permissionsChildrentItem->id }}"
+                                                               value="{{ $permissionsChildrentItem->id }}"
+                                                               {{ $permissionsChecked->contains('id', $permissionsChildrentItem->id) ? 'checked' : '' }}>
+                                                        <label class="form-check-label cursor-pointer"
+                                                               for="permission_childrent_item_{{ $permissionsChildrentItem->id }}">
+                                                            {{ $permissionsChildrentItem->display_name }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <button type="submit" class="btn btn-primary mb-5">Submit</button>
                             </form>
-                        </div>
+
                     </div>
                     <!-- /.col-md-6 -->
                 </div>
@@ -47,4 +81,11 @@
     </div>
     <!-- /.content-wrapper -->
 
+@endsection
+@section('javascript')
+    <script language="javascript">
+        $('.checkbox-wrapper').on('click', function () {
+            $(this).parents('.card').find('.checkbox-childrent').prop('checked', $(this).prop('checked'))
+        })
+    </script>
 @endsection

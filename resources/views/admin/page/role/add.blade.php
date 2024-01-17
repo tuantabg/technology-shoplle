@@ -43,7 +43,7 @@
                                                            id="module_check_{{ $permissionParentItem->id }}">
                                                     <label class="form-check-label cursor-pointer"
                                                            for="module_check_{{ $permissionParentItem->id }}">
-                                                        Module {{ $permissionParentItem->name }}
+                                                        Module {{ $permissionParentItem->display_name }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -51,12 +51,13 @@
                                                 @foreach($permissionParentItem->permissionsChildrent as $permissionsChildrentItem )
                                                     <div class="form-group form-check col-md-3">
                                                         <input type="checkbox"
+                                                               name="permission_id[]"
                                                                class="form-check-input checkbox-childrent cursor-pointer"
                                                                id="permission_childrent_item_{{ $permissionsChildrentItem->id }}"
                                                                value="{{ $permissionsChildrentItem->id }}">
                                                         <label class="form-check-label cursor-pointer"
                                                                for="permission_childrent_item_{{ $permissionsChildrentItem->id }}">
-                                                            {{ $permissionsChildrentItem->name }}
+                                                            {{ $permissionsChildrentItem->display_name }}
                                                         </label>
                                                     </div>
                                                 @endforeach

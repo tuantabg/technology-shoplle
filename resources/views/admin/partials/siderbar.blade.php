@@ -128,7 +128,7 @@
                                 request()->is('admin/settings/edit/*') ? 'active' : ''
                             }}">
                                 <i class="nav-icon fas fa-cogs"></i>
-                                <p>Cài Đặt</p>
+                                <p>Thông tin WEB</p>
                             </a>
                         </li>
                     </ul>

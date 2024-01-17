@@ -36,10 +36,12 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $this->role->create([
+        $role = $this->role->create([
             'name' => $request->name,
             'display_name' => $request->display_name
         ]);
+
+        $role->permissions()->attach($request->permission_id);
 
         return redirect()->route('roles.index')->with('message','Thêm vai trò thành công');
     }
@@ -47,16 +49,20 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->role->find($id);
+        $permissionsParent = $this->permission->where('parent_id', 0)->get();
+        $permissionsChecked = $role->permissions;
 
-        return view('admin.page.role.edit', compact('role'));
+        return view('admin.page.role.edit', compact('role', 'permissionsParent', 'permissionsChecked'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->role->find($id)->update([
+        $role = $this->role->find($id)->update([
             'name' => $request->name,
             'display_name' => $request->display_name
         ]);
+        $role = $this->role->find($id);
+        $role->permissions()->sync($request->permission_id);
 
         return redirect()->route('roles.index')->with('message','Cập nhập vai trò thành công');
     }
