@@ -123,5 +123,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('deleteInformation', function ($user) {
             return $user->checkPermissionAccess(config('permissions.access.deleteInformation'));
         });
+
+        // Gate permission
+        Gate::define('addPermission', function ($user) {
+            return $user->checkPermissionAccess(config('permissions.access.addPermission'));
+        });
     }
 }

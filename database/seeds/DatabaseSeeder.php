@@ -76,6 +76,7 @@ class DatabaseSeeder extends Seeder
             ['parent_id'=>24,'name'=>'Add Roles','display_name'=>'Thêm vai trò','key_code'=>'add_role'],
             ['parent_id'=>24,'name'=>'Edit Roles','display_name'=>'Sửa vai trò','key_code'=>'edit_role'],
             ['parent_id'=>24,'name'=>'Delete Roles','display_name'=>'Xóa vai trò','key_code'=>'delete_role'],
+            ['parent_id'=>24,'name'=>'Add Permissions','display_name'=>'Thêm Quyền','key_code'=>'add_permission'],
         ];
         $dataPermissionRole = [
             ['role_id'=> 1,'permission_id'=> 2],
@@ -107,6 +108,7 @@ class DatabaseSeeder extends Seeder
             ['role_id'=> 1,'permission_id'=> 30],
             ['role_id'=> 1,'permission_id'=> 31],
             ['role_id'=> 1,'permission_id'=> 32],
+            ['role_id'=> 1,'permission_id'=> 33],
         ];
         $dataRoleUser = [
             ['user_id'=> 1,'role_id'=> 1],

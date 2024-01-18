@@ -139,7 +139,8 @@
                         request()->is('admin/users/edit/*')         ||
                         request()->is('admin/roles')                ||
                         request()->is('admin/roles/create')         ||
-                        request()->is('admin/roles/edit/*')         ? 'menu-open' : ''
+                        request()->is('admin/roles/edit/*')         ||
+                        request()->is('admin/permissions/create')   ? 'menu-open' : ''
                     }}">
                     <a href="#" class="nav-link {{
                         request()->is('admin/users')                ||
@@ -147,7 +148,8 @@
                         request()->is('admin/users/edit/*')         ||
                         request()->is('admin/roles')                ||
                         request()->is('admin/roles/create')         ||
-                        request()->is('admin/roles/edit/*')         ? 'active' : ''
+                        request()->is('admin/roles/edit/*')         ||
+                        request()->is('admin/permissions/create')   ? 'active' : ''
                     }}">
                         <i class="nav-icon fas fa-address-book"></i>
                         <p>Quản Lý Tài Khoản <i class="right fas fa-angle-left"></i></p>
@@ -171,6 +173,14 @@
                             }}">
                                 <i class="nav-icon fas fa-sitemap"></i>
                                 <p>Vai trò (Role)</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('permissions.create') }}" class="nav-link {{
+                                request()->is('admin/permissions/create') ? 'active' : ''
+                            }}">
+                                <i class="nav-icon fas fa-sitemap"></i>
+                                <p>Phân quyền (Permission)</p>
                             </a>
                         </li>
                     </ul>

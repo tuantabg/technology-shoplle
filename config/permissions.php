@@ -29,6 +29,22 @@ return [
         'listInformation'   => 'list_information',
         'addInformation'    => 'add_information',
         'editInformation'   => 'edit_information',
-        'deleteInformation' => 'delete_information'
+        'deleteInformation' => 'delete_information',
+        'addPermission'    => 'add_permission',
+    ],
+    'table_module' => [
+        'category',
+        'product',
+        'information',
+        'slider',
+        'menu',
+        'user',
+        'role'
+    ],
+    'module_childrent' => [
+        'list',
+        'add',
+        'edit',
+        'delete'
     ]
 ];

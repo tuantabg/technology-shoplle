@@ -5,10 +5,10 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
-//use App\Http\Controllers\Admin\InformationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,28 +29,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     Route::get('/dashboard', function () {
         return view('admin.page.main');
     })->name('dashboard');
-
-    // Route menus
-    Route::prefix('menus')->group(function () {
-        Route::get('/', [MenuController::class, 'index'])->middleware('can:listMenu')->name('menus.index');
-        Route::get('/create', [MenuController::class, 'create'])->middleware('can:addMenu')->name('menus.create');
-        Route::get('/edit/{id}', [MenuController::class, 'edit'])->middleware('can:editMenu')->name('menus.edit');
-        Route::get('/delete/{id}', [MenuController::class, 'delete'])->middleware('can:deleteMenu')->name('menus.delete');
-
-        Route::post('/store', [MenuController::class, 'store'])->name('menus.store');
-        Route::post('/update/{id}', [MenuController::class, 'update'])->name('menus.update');
-    });
-
-    // Route sliders
-    Route::prefix('sliders')->group(function () {
-        Route::get('/', [SliderController::class, 'index'])->middleware('can:listSlide')->name('sliders.index');
-        Route::get('/create', [SliderController::class, 'create'])->middleware('can:addSlide')->name('sliders.create');
-        Route::get('/edit/{id}', [SliderController::class, 'edit'])->middleware('can:editSlide')->name('sliders.edit');
-        Route::get('/delete/{id}', [SliderController::class, 'delete'])->middleware('can:deleteSlide')->name('sliders.delete');
-
-        Route::post('/store', [SliderController::class, 'store'])->name('sliders.store');
-        Route::post('/update/{id}', [SliderController::class, 'update'])->name('sliders.update');
-    });
 
     // Route user
     Route::prefix('users')->group(function () {
@@ -78,17 +56,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
         Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
     });
 
-    // Route Setting
-    Route::prefix('settings')->group(function () {
-        Route::get('/', [SettingController::class, 'index'])->middleware('can:listInformation')->name('settings.index');
-        Route::get('/create', [SettingController::class, 'create'])->middleware('can:addInformation')->name('settings.create');
-        Route::get('/edit/{id}', [SettingController::class, 'edit'])->middleware('can:editInformation')->name('settings.edit');
-        Route::get('/delete/{id}', [SettingController::class, 'delete'])->middleware('can:deleteInformation')->name('settings.delete');
-
-        Route::post('/store', [SettingController::class, 'store'])->name('settings.store');
-        Route::post('/update/{id}', [SettingController::class, 'update'])->name('settings.update');
-    });
-
     // Route categories
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->middleware('can:listCategory')->name('categories.index');
@@ -113,6 +80,45 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
 
         Route::post('/store', [ProductController::class, 'store'])->name('products.store');
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('products.update');
+    });
+
+    // Route menus
+    Route::prefix('menus')->group(function () {
+        Route::get('/', [MenuController::class, 'index'])->middleware('can:listMenu')->name('menus.index');
+        Route::get('/create', [MenuController::class, 'create'])->middleware('can:addMenu')->name('menus.create');
+        Route::get('/edit/{id}', [MenuController::class, 'edit'])->middleware('can:editMenu')->name('menus.edit');
+        Route::get('/delete/{id}', [MenuController::class, 'delete'])->middleware('can:deleteMenu')->name('menus.delete');
+
+        Route::post('/store', [MenuController::class, 'store'])->name('menus.store');
+        Route::post('/update/{id}', [MenuController::class, 'update'])->name('menus.update');
+    });
+
+    // Route sliders
+    Route::prefix('sliders')->group(function () {
+        Route::get('/', [SliderController::class, 'index'])->middleware('can:listSlide')->name('sliders.index');
+        Route::get('/create', [SliderController::class, 'create'])->middleware('can:addSlide')->name('sliders.create');
+        Route::get('/edit/{id}', [SliderController::class, 'edit'])->middleware('can:editSlide')->name('sliders.edit');
+        Route::get('/delete/{id}', [SliderController::class, 'delete'])->middleware('can:deleteSlide')->name('sliders.delete');
+
+        Route::post('/store', [SliderController::class, 'store'])->name('sliders.store');
+        Route::post('/update/{id}', [SliderController::class, 'update'])->name('sliders.update');
+    });
+
+    // Route Setting
+    Route::prefix('settings')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->middleware('can:listInformation')->name('settings.index');
+        Route::get('/create', [SettingController::class, 'create'])->middleware('can:addInformation')->name('settings.create');
+        Route::get('/edit/{id}', [SettingController::class, 'edit'])->middleware('can:editInformation')->name('settings.edit');
+        Route::get('/delete/{id}', [SettingController::class, 'delete'])->middleware('can:deleteInformation')->name('settings.delete');
+
+        Route::post('/store', [SettingController::class, 'store'])->name('settings.store');
+        Route::post('/update/{id}', [SettingController::class, 'update'])->name('settings.update');
+    });
+
+    // Route Setting
+    Route::prefix('permissions')->group(function () {
+        Route::get('/create', [PermissionController::class, 'create'])->middleware('can:addPermission')->name('permissions.create');
+        Route::post('/store', [PermissionController::class, 'store'])->name('permissions.store');
     });
 });
 
