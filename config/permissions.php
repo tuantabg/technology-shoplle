@@ -33,18 +33,9 @@ return [
         'addPermission'    => 'add_permission',
     ],
     'table_module' => [
-        'category',
-        'product',
-        'information',
-        'slider',
-        'menu',
-        'user',
-        'role'
+        'list'      => 'Danh Sách',
+        'add'       => 'Thêm',
+        'edit'      => 'Sửa',
+        'delete'    => 'Xóa'
     ],
-    'module_childrent' => [
-        'list',
-        'add',
-        'edit',
-        'delete'
-    ]
 ];

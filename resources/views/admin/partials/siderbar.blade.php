@@ -180,7 +180,7 @@
                                 request()->is('admin/permissions/create') ? 'active' : ''
                             }}">
                                 <i class="nav-icon fas fa-sitemap"></i>
-                                <p>Phân quyền (Permission)</p>
+                                <p>Tạo quyền (Permission)</p>
                             </a>
                         </li>
                     </ul>
