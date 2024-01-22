@@ -7,7 +7,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.header-page', ['name'=> 'Danh Sách Slider', 'key' => true, 'route' => 'sliders.create'])
+        @include('admin.partials.header-page', ['name'=> 'Danh Sách Slider', 'key' => true, 'route' => 'sliders.create', 'permission' => 'addSlide'])
 
         <!-- Main content -->
         <div class="content">

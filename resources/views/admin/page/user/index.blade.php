@@ -4,7 +4,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.header-page', ['name'=> 'Danh Sách Tài Khoản', 'key' => true, 'route' => 'users.create'])
+        @include('admin.partials.header-page', ['name'=> 'Danh Sách Tài Khoản', 'key' => true, 'route' => 'users.create', 'permission' => 'addUser'])
 
         <!-- Main content -->
         <div class="content">

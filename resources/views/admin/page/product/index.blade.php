@@ -4,7 +4,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.header-page', ['name'=> 'Danh Sách Sản Phẩm', 'key' => true, 'route' => 'products.create'])
+        @include('admin.partials.header-page', ['name'=> 'Danh Sách Sản Phẩm', 'key' => true, 'route' => 'products.create', 'permission' => 'addProduct'])
 
         <!-- Main content -->
         <div class="content">
@@ -26,12 +26,14 @@
                                            aria-selected="true">Sản phẩm
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
-                                           href="#nav-product-delete" role="tab" aria-controls="nav-product-delete"
-                                           aria-selected="false">Sản phẩm đã xóa
-                                        </a>
-                                    </li>
+                                    @can('deleteProduct')
+                                        <li class="nav-item">
+                                            <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
+                                               href="#nav-product-delete" role="tab" aria-controls="nav-product-delete"
+                                               aria-selected="false">Sản phẩm đã xóa
+                                            </a>
+                                        </li>
+                                    @endcan
                                 </ul>
 
                                 <div class="tab-content" id="nav-tabContent">
@@ -72,14 +74,18 @@
                                                     <td>{{ optional($product->category)->name }}</td>
                                                     <td>{!! $product->detail !!}</td>
                                                     <td class="text-right">
-                                                        <a href="{{ route('products.edit', ['id' => $product->id]) }}" class="btn btn-primary btn-sm">
-                                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                                        </a>
-                                                        <button
-                                                            data-url="{{ route('products.delete', ['id' => $product->id]) }}"
-                                                            class="btn btn-danger btn-sm action-delete">
-                                                            <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                        </button>
+                                                        @can('editProduct')
+                                                            <a href="{{ route('products.edit', ['id' => $product->id]) }}" class="btn btn-primary btn-sm">
+                                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                            </a>
+                                                        @endcan
+                                                        @can('deleteProduct')
+                                                            <button
+                                                                data-url="{{ route('products.delete', ['id' => $product->id]) }}"
+                                                                class="btn btn-danger btn-sm action-delete">
+                                                                <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                            </button>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                             @endforeach

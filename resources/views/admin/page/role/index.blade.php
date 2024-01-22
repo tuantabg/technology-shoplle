@@ -4,7 +4,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.header-page', ['name'=> 'Danh Sách Vai Trò', 'key' => true, 'route' => 'roles.create'])
+        @include('admin.partials.header-page', ['name'=> 'Danh Sách Vai Trò', 'key' => true, 'route' => 'roles.create', 'permission' => 'addRole'])
 
         <!-- Main content -->
         <div class="content">

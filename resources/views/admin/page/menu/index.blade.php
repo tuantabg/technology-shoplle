@@ -4,7 +4,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.header-page', ['name'=> 'Danh Sách Menu', 'key' => true, 'route' => 'menus.create'])
+        @include('admin.partials.header-page', ['name'=> 'Danh Sách Menu', 'key' => true, 'route' => 'menus.create', 'permission' => 'addMenu'])
 
         <!-- Main content -->
         <div class="content">

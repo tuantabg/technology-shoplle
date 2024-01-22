@@ -59,9 +59,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     // Route categories
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->middleware('can:listCategory')->name('categories.index');
-        Route::get('/create', [CategoryController::class, 'create'])->middleware('can:listCategory')->name('categories.create');
-        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->middleware('can:listCategory')->name('categories.edit');
-        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->middleware('can:listCategory')->name('categories.delete');
+        Route::get('/create', [CategoryController::class, 'create'])->middleware('can:addCategory')->name('categories.create');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->middleware('can:editCategory')->name('categories.edit');
+        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->middleware('can:deleteCategory')->name('categories.delete');
         Route::get('/delete/permanently/{id}', [CategoryController::class, 'deletePermanently'])->name('categories.delete.permanently');
         Route::get('/delete/recover/{id}', [CategoryController::class, 'deleteRecover'])->name('categories.delete.recover');
 

@@ -6,12 +6,15 @@
                 <h1 class="text-uppercase m-0">{{ $name }}</h1>
             </div><!-- /.col -->
             @if($key == true)
-                <div class="col-sm-2 text-right">
-                    <a href="{{ route($route) }}" class="btn btn-primary">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Thêm mới
-                    </a>
-                </div>
+                @can($permission)
+
+                    <div class="col-sm-2 text-right">
+                        <a href="{{ route($route) }}" class="btn btn-primary">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Thêm mới
+                        </a>
+                    </div>
+                @endcan
             @endif
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->

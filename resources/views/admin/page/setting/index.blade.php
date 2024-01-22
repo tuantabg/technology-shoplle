@@ -12,6 +12,7 @@
                         <h1 class="text-uppercase m-0">Danh Sách Cài Đặt</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-2 text-right">
+                        @can('addInformation')
                         <div class="btn-group">
                             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#" >
                                 Thêm cài đặt
@@ -32,6 +33,7 @@
                                 </li>
                             </ul>
                         </div>
+                        @endcan
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->

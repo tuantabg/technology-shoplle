@@ -4,7 +4,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.header-page', ['name'=> 'Danh MỤc Sản Phẩm', 'key' => true, 'route' => 'categories.create'])
+        @include('admin.partials.header-page', ['name'=> 'Danh MỤc Sản Phẩm', 'key' => true, 'route' => 'categories.create', 'permission' => 'addCategory'])
 
         <!-- Main content -->
         <div class="content">
