@@ -26,12 +26,14 @@
                                            aria-selected="true">Tài khoản
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
-                                           href="#nav-use-delete" role="tab" aria-controls="nav-use-delete"
-                                           aria-selected="false">Tài khoản đã xóa
-                                        </a>
-                                    </li>
+                                    @can('deleteRole')
+                                        <li class="nav-item">
+                                            <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
+                                               href="#nav-use-delete" role="tab" aria-controls="nav-use-delete"
+                                               aria-selected="false">Tài khoản đã xóa
+                                            </a>
+                                        </li>
+                                    @endcan
                                 </ul>
 
                                 <div class="tab-content" id="nav-tabContent">
@@ -54,14 +56,18 @@
                                                     <td>{{ $role->name }}</td>
                                                     <td>{{ $role->display_name }}</td>
                                                     <td class="text-right">
-                                                        <a href="{{ route('roles.edit', ['id' => $role->id]) }}" class="btn btn-primary btn-sm">
-                                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                                        </a>
-                                                        <button
-                                                            data-url="{{ route('roles.delete', ['id' => $role->id]) }}"
-                                                            class="btn btn-danger btn-sm action-delete">
-                                                            <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                        </button>
+                                                        @can('editRole')
+                                                            <a href="{{ route('roles.edit', ['id' => $role->id]) }}" class="btn btn-primary btn-sm">
+                                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                            </a>
+                                                        @endcan
+                                                        @can('deleteRole')
+                                                            <button
+                                                                data-url="{{ route('roles.delete', ['id' => $role->id]) }}"
+                                                                class="btn btn-danger btn-sm action-delete">
+                                                                <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                            </button>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                             @endforeach

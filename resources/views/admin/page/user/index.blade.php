@@ -26,12 +26,14 @@
                                                aria-selected="true">Tài khoản
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
-                                               href="#nav-use-delete" role="tab" aria-controls="nav-use-delete"
-                                               aria-selected="false">Tài khoản đã xóa
-                                            </a>
-                                        </li>
+                                        @can('deleteUser')
+                                            <li class="nav-item">
+                                                <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
+                                                   href="#nav-use-delete" role="tab" aria-controls="nav-use-delete"
+                                                   aria-selected="false">Tài khoản đã xóa
+                                                </a>
+                                            </li>
+                                        @endcan
                                     </ul>
 
                                     <div class="tab-content" id="nav-tabContent">
@@ -61,14 +63,18 @@
                                                         <td>{{ $user->email }}</td>
                                                         <td>@foreach($user->roles as $role){{ $role->display_name }}@endforeach</td>
                                                         <td class="text-right">
-                                                            <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-primary btn-sm">
-                                                                <i class="fa fa-edit" aria-hidden="true"></i>
-                                                            </a>
-                                                            <button
-                                                                data-url="{{ route('users.delete', ['id' => $user->id]) }}"
-                                                                class="btn btn-danger btn-sm action-delete">
-                                                                <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                            </button>
+                                                            @can('editUser')
+                                                                <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-primary btn-sm">
+                                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                                </a>
+                                                            @endcan
+                                                            @can('deleteUser')
+                                                                <button
+                                                                    data-url="{{ route('users.delete', ['id' => $user->id]) }}"
+                                                                    class="btn btn-danger btn-sm action-delete">
+                                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                                </button>
+                                                            @endcan
                                                         </td>
                                                     </tr>
                                                 @endforeach

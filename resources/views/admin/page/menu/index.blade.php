@@ -35,12 +35,16 @@
                                             <td>{{ $menu->name }}</td>
                                             <td>{{ $menu->slug }}</td>
                                             <td class="text-right">
-                                                <a href="{{ route('menus.edit', ['id' => $menu->id]) }}" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="{{ route('menus.delete', ['id' => $menu->id]) }}"  class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                </a>
+                                                @can('editMenu')
+                                                    <a href="{{ route('menus.edit', ['id' => $menu->id]) }}" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                                    </a>
+                                                @endcan
+                                                @can('deleteMenu')
+                                                    <a href="{{ route('menus.delete', ['id' => $menu->id]) }}"  class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                    </a>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

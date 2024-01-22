@@ -46,15 +46,19 @@
                                             <td class="align-middle">{{ $slider->image_url }}</td>
                                             <td class="align-middle">{!! $slider->description !!}</td>
                                             <td class="align-middle text-right">
+                                                @can('editSlide')
                                                 <a href="{{ route('sliders.edit', ['id' => $slider->id]) }}"
                                                     class="btn btn-primary btn-sm">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </a>
+                                                @endcan
+                                                @can('deleteSlide')
                                                 <button
                                                     data-url="{{ route('sliders.delete', ['id' => $slider->id]) }}"
                                                     class="btn btn-danger btn-sm action-delete">
                                                     <i class="fa fa-trash-alt" aria-hidden="true"></i>
                                                 </button>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

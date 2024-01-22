@@ -26,12 +26,14 @@
                                            aria-selected="true">Sản phẩm
                                         </a>
                                     </li>
+                                    @can('deleteCategory')
                                     <li class="nav-item">
                                         <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
                                            href="#nav-product-delete" role="tab" aria-controls="nav-product-delete"
                                            aria-selected="false">Sản phẩm đã xóa
                                         </a>
                                     </li>
+                                    @endcan
                                 </ul>
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active"
@@ -53,14 +55,18 @@
                                                     <td>{{ $category->name }}</td>
                                                     <td>{{ $category->slug }}</td>
                                                     <td class="text-right">
-                                                        <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-primary btn-sm">
-                                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                                        </a>
-                                                        <button
-                                                            data-url="{{ route('categories.delete', ['id' => $category->id]) }}"
-                                                            class="btn btn-danger btn-sm action-delete">
-                                                            <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                        </button>
+                                                        @can('editCategory')
+                                                            <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-primary btn-sm">
+                                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                            </a>
+                                                        @endcan
+                                                        @can('deleteCategory')
+                                                            <button
+                                                                data-url="{{ route('categories.delete', ['id' => $category->id]) }}"
+                                                                class="btn btn-danger btn-sm action-delete">
+                                                                <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                            </button>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                             @endforeach

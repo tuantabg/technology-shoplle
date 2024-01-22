@@ -69,14 +69,18 @@
                                             <td>{{ $setting->config_key }}</td>
                                             <td>{!! $setting->config_value !!}</td>
                                             <td class="text-right">
-                                                <a href="{{ route('settings.edit', ['id' => $setting->id]) . '?type=' . $setting->type }}" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i>
-                                                </a>
-                                                <button
-                                                    data-url="{{ route('settings.delete', ['id' => $setting->id]) }}"
-                                                    class="btn btn-danger btn-sm action-delete">
-                                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                                </button>
+                                                @can('editInformation')
+                                                    <a href="{{ route('settings.edit', ['id' => $setting->id]) . '?type=' . $setting->type }}" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                                    </a>
+                                                @endcan
+                                                @can('deleteInformation')
+                                                    <button
+                                                        data-url="{{ route('settings.delete', ['id' => $setting->id]) }}"
+                                                        class="btn btn-danger btn-sm action-delete">
+                                                        <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                                    </button>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
