@@ -1,3 +1,21 @@
+@php
+    $routeName = \Route::currentRouteName();
+    // Route Category, Product
+    $routeAllCategories     = config('nameRoutes.routeAllCategories');
+    $routeCategories        = config('nameRoutes.categories');
+    $routeProducts          = config('nameRoutes.products');
+    // Route Menu, Slider, Information
+    $routeAllSettings       = config('nameRoutes.routeAllSettings');
+    $routeMenus             = config('nameRoutes.menus');
+    $routeSliders           = config('nameRoutes.sliders');
+    $routeInformation       = config('nameRoutes.information');
+    // Route User, Role, Permission
+    $routeAccountManagement = config('nameRoutes.routeAccountManagement');
+    $routeUsers             = config('nameRoutes.users');
+    $routeRoles             = config('nameRoutes.roles');
+    $routePermissions       = config('nameRoutes.permissions');
+@endphp
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -26,165 +44,109 @@
                         <p>Bảng điều khiển</p>
                     </a>
                 </li>
-                <li class="nav-item {{
-                        request()->is('admin/categories')        ||
-                        request()->is('admin/categories/create') ||
-                        request()->is('admin/categories/edit/*') ||
-                        request()->is('admin/products')          ||
-                        request()->is('admin/products/create')   ||
-                        request()->is('admin/products/edit/*')   ? 'menu-open' : ''
-                    }}">
-                    <a href="#" class="nav-link {{
-                        request()->is('admin/categories') ||
-                        request()->is('admin/categories/create') ||
-                        request()->is('admin/categories/edit/*') ||
-                        request()->is('admin/products')          ||
-                        request()->is('admin/products/create')   ||
-                        request()->is('admin/products/edit/*')   ? 'active' : ''
-                    }}">
-                        <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
-                        <p>Danh mục <i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('products.index') }}" class="nav-link {{
-                                request()->is('admin/products')        ||
-                                request()->is('admin/products/create') ||
-                                request()->is('admin/products/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="fa fa-cubes nav-icon" aria-hidden="true"></i>
-                                <p>Sảm Phẩm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('categories.index') }}" class="nav-link {{
-                                request()->is('admin/categories')        ||
-                                request()->is('admin/categories/create') ||
-                                request()->is('admin/categories/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="fa fa-folder-open nav-icon" aria-hidden="true"></i>
-                                <p>Danh Mục SP</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @if((Auth::user()->can('listProduct')) || (Auth::user()->can('listCategory')))
+                    <li class="nav-item {{ in_array($routeName, $routeAllCategories, true) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ in_array($routeName, $routeAllCategories, true) ? 'active' : '' }} ">
+                            <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
+                            <p>Danh mục <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('listProduct')
+                                <li class="nav-item">
+                                    <a href="{{ route('products.index') }}" class="nav-link
+                                        {{ in_array($routeName, $routeProducts, true) ? 'active' : '' }}">
+                                        <i class="fa fa-cubes nav-icon" aria-hidden="true"></i>
+                                        <p>Sảm Phẩm</p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('listCategory')
+                                <li class="nav-item">
+                                    <a href="{{ route('categories.index') }}" class="nav-link
+                                        {{ in_array($routeName, $routeCategories, true) ? 'active' : '' }}">
+                                        <i class="fa fa-folder-open nav-icon" aria-hidden="true"></i>
+                                        <p>Danh Mục SP</p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
 
-                <li class="nav-item {{
-                        request()->is('admin/menus')                ||
-                        request()->is('admin/menus/create')         ||
-                        request()->is('admin/menus/edit/*')         ||
-                        request()->is('admin/sliders')              ||
-                        request()->is('admin/sliders/create')       ||
-                        request()->is('admin/sliders/edit/*')       ||
-                        request()->is('admin/information')          ||
-                        request()->is('admin/information/create')   ||
-                        request()->is('admin/information/edit/*')   ||
-                        request()->is('admin/settings')             ||
-                        request()->is('admin/settings/create')      ||
-                        request()->is('admin/settings/edit/*')      ? 'menu-open' : ''
-                    }}">
-                    <a href="#" class="nav-link {{
-                        request()->is('admin/menus')                ||
-                        request()->is('admin/menus/create')         ||
-                        request()->is('admin/menus/edit/*')         ||
-                        request()->is('admin/sliders')              ||
-                        request()->is('admin/sliders/create')       ||
-                        request()->is('admin/sliders/edit/*')       ||
-                        request()->is('admin/information')          ||
-                        request()->is('admin/information/create')   ||
-                        request()->is('admin/information/edit/*')   ||
-                        request()->is('admin/settings')             ||
-                        request()->is('admin/settings/create')      ||
-                        request()->is('admin/settings/edit/*')      ? 'active' : ''
-                    }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Cài đặt <i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"> <!-- menu-open -->
-                            <a href="{{ route('menus.index') }}" class="nav-link {{
-                                request()->is('admin/menus')        ||
-                                request()->is('admin/menus/create') ||
-                                request()->is('admin/menus/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="nav-icon fas fa-bars"></i>
-                                <p>Menu</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('sliders.index') }}" class="nav-link {{
-                                request()->is('admin/sliders')        ||
-                                request()->is('admin/sliders/create') ||
-                                request()->is('admin/sliders/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="nav-icon fas fa-images"></i>
-                                <p>Slider</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('settings.index') }}" class="nav-link {{
-                                request()->is('admin/settings')        ||
-                                request()->is('admin/settings/create') ||
-                                request()->is('admin/settings/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="nav-icon fas fa-cogs"></i>
-                                <p>Thông tin WEB</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item {{
-                        request()->is('admin/users')                ||
-                        request()->is('admin/users/create')         ||
-                        request()->is('admin/users/edit/*')         ||
-                        request()->is('admin/roles')                ||
-                        request()->is('admin/roles/create')         ||
-                        request()->is('admin/roles/edit/*')         ||
-                        request()->is('admin/permissions/create')   ? 'menu-open' : ''
-                    }}">
-                    <a href="#" class="nav-link {{
-                        request()->is('admin/users')                ||
-                        request()->is('admin/users/create')         ||
-                        request()->is('admin/users/edit/*')         ||
-                        request()->is('admin/roles')                ||
-                        request()->is('admin/roles/create')         ||
-                        request()->is('admin/roles/edit/*')         ||
-                        request()->is('admin/permissions/create')   ? 'active' : ''
-                    }}">
-                        <i class="nav-icon fas fa-address-book"></i>
-                        <p>Quản Lý Tài Khoản <i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('users.index') }}" class="nav-link {{
-                                request()->is('admin/users')        ||
-                                request()->is('admin/users/create') ||
-                                request()->is('admin/users/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>Danh sách tài khoản</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('roles.index') }}" class="nav-link {{
-                                request()->is('admin/roles')        ||
-                                request()->is('admin/roles/create') ||
-                                request()->is('admin/roles/edit/*') ? 'active' : ''
-                            }}">
-                                <i class="nav-icon fas fa-sitemap"></i>
-                                <p>Vai trò (Role)</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('permissions.create') }}" class="nav-link {{
-                                request()->is('admin/permissions/create') ? 'active' : ''
-                            }}">
-                                <i class="nav-icon fas fa-sitemap"></i>
-                                <p>Tạo quyền (Permission)</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @if((Auth::user()->can('listMenu')) || (Auth::user()->can('listSlide')) || (Auth::user()->can('listInformation')))
+                    <li class="nav-item {{ in_array($routeName, $routeAllSettings, true) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ in_array($routeName, $routeAllSettings, true) ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>Cài đặt <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('listMenu')
+                                <li class="nav-item"> <!-- menu-open -->
+                                    <a href="{{ route('menus.index') }}" class="nav-link
+                                        {{ in_array($routeName, $routeMenus, true) ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-bars"></i>
+                                        <p>Menu</p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('listSlide')
+                                <li class="nav-item">
+                                    <a href="{{ route('sliders.index') }}" class="nav-link
+                                        {{ in_array($routeName, $routeSliders, true) ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-images"></i>
+                                        <p>Slider</p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('listInformation')
+                                <li class="nav-item">
+                                    <a href="{{ route('settings.index') }}" class="nav-link
+                                        {{ in_array($routeName, $routeInformation, true) ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-cogs"></i>
+                                        <p>Thông tin WEB</p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
+                @if((Auth::user()->can('listUser')) || (Auth::user()->can('listRole')) || (Auth::user()->can('addPermission')))
+                    <li class="nav-item {{ in_array($routeName, $routeAccountManagement, true) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ in_array($routeName, $routeAccountManagement, true) ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-address-book"></i>
+                            <p>Quản Lý Tài Khoản <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('listUser')
+                                <li class="nav-item">
+                                    <a href="{{ route('users.index') }}" class="nav-link
+                                        {{ in_array($routeName, $routeUsers, true) ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Danh sách tài khoản</p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('listRole')
+                                <li class="nav-item">
+                                    <a href="{{ route('roles.index') }}" class="nav-link
+                                        {{ in_array($routeName, $routeRoles, true) ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-sitemap"></i>
+                                        <p>Vai trò (Role)</p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('addPermission')
+                                <li class="nav-item">
+                                    <a href="{{ route('permissions.create') }}" class="nav-link
+                                        {{ in_array($routeName, $routePermissions, true) ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-sitemap"></i>
+                                        <p>Tạo quyền (Permission)</p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

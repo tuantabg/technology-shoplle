@@ -51,7 +51,7 @@ class User extends Authenticatable
     public function checkPermissionAccess($permissionCheck)
     {
         // B1 - Lay dc tat ca cac quyen user dang login he thong
-        // B2 - So sanh gia tri dua vao router hien tai xem cos ton tai cac quyen
+        // B2 - So sanh gia tri dua vao router hien tai xem co ton tai cac quyen
         $roles = auth()->user()->roles;
         foreach ($roles as $role) {
             $permission = $role->permissions;

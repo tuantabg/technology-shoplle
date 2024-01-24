@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -9,6 +11,9 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+
+use App\Http\Controllers\Client\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +26,13 @@ use App\Http\Controllers\Admin\PermissionController;
 |
 */
 
-Route::get('/admin', [AdminController::class, 'login'])->name('login.admin');
-Route::post('/admin', [AdminController::class, 'postLogin'])->name('post.login.admin');
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/admin', [AdminController::class, 'index'])->name('login.admin');
+Route::post('/admin', [AdminController::class, 'postLogin'])->name('post.login.admin');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function () {
     Route::get('/dashboard', function () {
@@ -115,7 +124,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
         Route::post('/update/{id}', [SettingController::class, 'update'])->name('settings.update');
     });
 
-    // Route Setting
+    // Route Permissions
     Route::prefix('permissions')->group(function () {
         Route::get('/create', [PermissionController::class, 'create'])->middleware('can:addPermission')->name('permissions.create');
         Route::post('/store', [PermissionController::class, 'store'])->name('permissions.store');

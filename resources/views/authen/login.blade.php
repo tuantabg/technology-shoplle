@@ -33,7 +33,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 login-sec">
-                    <h2 class="text-center">ĐĂNG NHẬP</h2>
+                    <h2 class="text-center">{{ __('Login') }}</h2>
                     <form class="login-form" action="{{ route('post.login.admin') }}" method="post">
                         @csrf
                         <div class="form-group">

@@ -11,6 +11,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
+                        @if(session()->has('message'))
+                            <div class="alert alert-success alert-default-success" role="alert">
+                                {{ session()->get('message') }}
+                            </div>
+                        @endif
+
                         <form action="{{ route('permissions.store') }}" method="post">
                             @csrf
                             <div class="card">
@@ -62,4 +68,7 @@
     </div>
     <!-- /.content-wrapper -->
 
+@endsection
+@section('javascript')
+    <script src="{{ asset('common/alertSetTimeout.js') }}"></script>
 @endsection

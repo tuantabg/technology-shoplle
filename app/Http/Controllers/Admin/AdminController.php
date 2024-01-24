@@ -4,17 +4,34 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function login()
+    public function __construct()
     {
-//        dd(bcrypt('123456'));
+        $this->middleware('auth');
+    }
 
-        if (auth()->check()) {
-            return redirect()->route('dashboard');
+    public function index()
+    {
+        $roles = auth()->user()->roles;
+
+        foreach ($roles as $role) {
+            if ($role->id === 2){
+                if (auth()->check()) {
+                    return redirect()->route('home');
+                } else {
+                    return view('auth.login');
+                }
+            } else {
+                if (auth()->check()) {
+                    return redirect()->route('dashboard');
+                } else {
+                    return view('auth.login');
+                }
+            }
         }
-        return view('authen.login');
     }
 
     public function postLogin(Request $request)
