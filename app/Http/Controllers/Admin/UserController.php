@@ -20,14 +20,15 @@ class UserController extends Controller
 
     public function __construct(User $user, Role $role)
     {
+        $this->middleware('auth');
         $this->user = $user;
         $this->role = $role;
     }
 
     public function index()
     {
-        $users = $this->user->latest()->paginate(10);
-        $deletedUsers = $this->user->onlyTrashed()->latest()->paginate(10);
+        $users = $this->user->latest()->paginate(15);
+        $deletedUsers = $this->user->onlyTrashed()->latest()->paginate(15);
 
         return view('admin.page.user.index', compact('users', 'deletedUsers'));
     }

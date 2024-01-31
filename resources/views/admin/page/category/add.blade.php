@@ -11,6 +11,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
+                        @if(session()->has('message'))
+                            <div class="alert alert-success alert-default-success" role="alert">
+                                {{ session()->get('message') }}
+                            </div>
+                        @endif
+
                         <div class="card">
                             <!-- form start -->
                             <form action="{{ route('categories.store') }}" method="post">
@@ -36,6 +42,11 @@
                                             {!! $htmlOption !!}
                                         </select>
                                     </div>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" name="view_home" value="1"
+                                               id="view_home" class="form-check-input">
+                                        <label class="form-check-label" for="view_home">Hiển thị trang chủ</label>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
 
@@ -56,5 +67,6 @@
 
 @endsection
 @section('javascript')
+    <script src="{{ asset('common/alertSetTimeout.js') }}"></script>
     <script language="javascript" src="{{ asset('common/ChangeToSlug.js') }}"></script>
 @endsection

@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Client;
 
 use App\Category;
-use App\Components\MenuRecusive;
 use App\Menu;
 use App\Product;
 use App\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class ShowProductsInCategoryController extends Controller
 {
     private $menu;
     private $slider;
@@ -29,19 +28,17 @@ class HomeController extends Controller
         $this->product = $product;
     }
 
-    public function index()
+    public function index( $slug, $categoryId)
     {
         $menus = $this->menu->first()->get();
-        $sliders = $this->slider->latest()->get();
         $categories = $this->category->where('parent_id', 0)->latest()->get();
         $categoryProduct = $this->category->where('view_home', 1)->latest()->get();
         $categoryLimit = $this->category->where('parent_id', 0)->take(3)->get();
-        $products = $this->product->latest()->take(6)->get();
+        $products = $this->product->where('category_id', $categoryId)->paginate(12);
         $productRecommended = $this->product->latest('category_id', 'desc')->take(12)->get();
 
-        return view('client.page.home.index',
-            compact( 'menus',
-                'sliders',
+        return view('client.page.category.index',
+            compact('menus',
                 'categories',
                 'categoryProduct',
                 'categoryLimit',

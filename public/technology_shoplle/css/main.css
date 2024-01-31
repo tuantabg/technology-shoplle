@@ -100,6 +100,9 @@ a#scrollUp i{
 .justify-content-space-between{
     justify-content: space-between!important;
 }
+.font-weight-bold {
+    font-weight: bold;
+}
 
 .col-form-label {
     padding-top: calc(0.375rem + 1px);
@@ -166,11 +169,15 @@ a#scrollUp i{
 
 /**Login title**/
 .form-login,
-.form-register {
+.form-register,
+.form-reset,
+.form-confirm {
     margin-bottom: 30px;
 }
 .login-title,
-.register-title {
+.register-title,
+.reset-title,
+.confirm-title {
     text-transform: uppercase;
     text-align: center;
     font-size: 24px;
@@ -361,7 +368,7 @@ a#scrollUp i{
 	font-family: 'Roboto', sans-serif;
 	font-size: 17px;
 	font-weight: 300;
-	padding: 4px 0;
+	padding: 5px 0;
 }
 
 .mainmenu ul li a:hover, .mainmenu ul li a.active,  .shop-menu ul li a.active{
@@ -439,6 +446,35 @@ ul.sub-menu {
 .navbar-nav li ul.sub-menu li a:hover{
     color: #FDB45E;
 }
+
+/* menu fix */
+ul.nav li.li-fix div.sub-menu-fix {
+    display: none;
+    min-width: 480px;
+    height: auto;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+ul.nav > li.li-fix:hover > div.sub-menu-fix {
+    display: block;
+    -webkit-animation: fadeInUp 400ms;
+    -moz-animation: fadeInUp 400ms;
+    -ms-animation: fadeInUp 400ms;
+    -o-animation: fadeInUp 400ms;
+    animation: fadeInUp 400ms;
+}
+ul.nav li.li-fix div.sub-menu-fix ul {
+    float: left;
+    padding: 15px;
+}
+
+
+
+
+
 
 .fa-angle-down{
   padding-left: 5px;
@@ -990,7 +1026,12 @@ h2.title {
 	font-size: 24px;
 	font-weight: 700;
 }
-
+.productinfo h3{
+    color: #FE980F;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+}
 
 .productinfo p{
   font-family: 'Roboto', sans-serif;
@@ -1008,7 +1049,7 @@ h2.title {
 }
 
 .product-overlay {
-  background:#FE980F;
+  background: rgba(254, 152, 15, 0.7) !important;
   top: 0;
   height: 0;
   position: absolute;

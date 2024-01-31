@@ -14,11 +14,12 @@ class SettingController extends Controller
 
     public function __construct(Setting $setting)
     {
+        $this->middleware('auth');
         $this->setting = $setting;
     }
 
     public function index() {
-        $settings = $this->setting->latest()->paginate(10);
+        $settings = $this->setting->latest()->paginate(15);
 
         return view('admin.page.setting.index', compact('settings'));
     }

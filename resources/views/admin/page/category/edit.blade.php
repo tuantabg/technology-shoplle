@@ -36,6 +36,12 @@
                                             {!! $htmlOption !!}
                                         </select>
                                     </div>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" name="view_home" value="{{ !($category->view_home == null) ? null : 1 }}"
+                                               id="view_home" class="form-check-input"
+                                               {{ !($category->view_home == null) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="view_home">Hiển thị trang chủ</label>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
 

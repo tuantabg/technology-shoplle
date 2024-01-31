@@ -18,12 +18,13 @@ class SliderController extends Controller
 
     public function __construct(Slider $slider)
     {
+        $this->middleware('auth');
         $this->slider = $slider;
     }
 
     public function index()
     {
-        $sliders = $this->slider->latest()->paginate(10);
+        $sliders = $this->slider->latest()->paginate(15);
 
         return view('admin.page.slider.index', compact('sliders'));
     }

@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 
 use App\Http\Controllers\Client\HomeController;
-
+use App\Http\Controllers\Client\ShowProductsInCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +28,8 @@ use App\Http\Controllers\Client\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/category/{slug}/{id}', [ShowProductsInCategoryController::class, 'index'])->name('show.category');
+
 
 Auth::routes();
 
@@ -97,6 +99,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
         Route::get('/create', [MenuController::class, 'create'])->middleware('can:addMenu')->name('menus.create');
         Route::get('/edit/{id}', [MenuController::class, 'edit'])->middleware('can:editMenu')->name('menus.edit');
         Route::get('/delete/{id}', [MenuController::class, 'delete'])->middleware('can:deleteMenu')->name('menus.delete');
+        Route::get('/delete/permanently/{id}', [MenuController::class, 'deletePermanently'])->name('menus.delete.permanently');
+        Route::get('/delete/recover/{id}', [MenuController::class, 'deleteRecover'])->name('menus.delete.recover');
 
         Route::post('/store', [MenuController::class, 'store'])->name('menus.store');
         Route::post('/update/{id}', [MenuController::class, 'update'])->name('menus.update');

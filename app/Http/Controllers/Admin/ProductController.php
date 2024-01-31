@@ -32,6 +32,7 @@ class ProductController extends Controller
         Tag $tag,
         ProductTag $productTag
     ){
+        $this->middleware('auth');
         $this->category = $category;
         $this->product = $product;
         $this->productImage = $productImage;
@@ -41,8 +42,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->product->latest()->paginate(10);
-        $deletedProducts = $this->product->onlyTrashed()->latest()->paginate(10);
+        $products = $this->product->latest()->paginate(15);
+        $deletedProducts = $this->product->onlyTrashed()->latest()->paginate(15);
 
         return view('admin.page.product.index', compact('products', 'deletedProducts'));
     }

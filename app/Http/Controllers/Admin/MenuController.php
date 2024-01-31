@@ -13,14 +13,16 @@ class MenuController extends Controller
 
     public function __construct(Menu $menu)
     {
+        $this->middleware('auth');
         $this->menu = $menu;
     }
 
     public function index()
     {
-        $menus = $this->menu->latest()->paginate(10);
+        $menus = $this->menu->latest()->paginate(15);
+        $deletedMenus = $this->menu->onlyTrashed()->latest()->paginate(15);
 
-        return view('admin.page.menu.index', compact('menus'));
+        return view('admin.page.menu.index', compact('menus', 'deletedMenus'));
     }
 
     public function create()
@@ -38,7 +40,7 @@ class MenuController extends Controller
             'slug' => $request->input('slug'),
         ]);
 
-        return redirect()->route('menus.index')->with('message','Thêm menu thành công');
+        return redirect()->route('menus.create')->with('message','Thêm menu thành công');
     }
 
     public function edit($id)
@@ -73,5 +75,30 @@ class MenuController extends Controller
         $recusive = new  MenuRecusive($menus);
         $htmlOption = $recusive->menuRecusive($parentId);
         return $htmlOption;
+    }
+
+    public function deletePermanently($id)
+    {
+        try {
+            $this->menu->withTrashed()->find($id)->forceDelete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success'
+            ], 200);
+
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line: ' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'fail'
+            ], 500);
+        }
+    }
+
+    public function deleteRecover($id)
+    {
+        $this->menu->withTrashed()->where('id', $id)->restore();
+
+        return redirect()->route('menus.index')->with('message','Lấy lại menu thành công');
     }
 }

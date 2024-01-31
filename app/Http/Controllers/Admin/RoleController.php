@@ -15,14 +15,15 @@ class RoleController extends Controller
 
     public function __construct(Role $role, Permission $permission)
     {
+        $this->middleware('auth');
         $this->role = $role;
         $this->permission = $permission;
     }
 
     public function index()
     {
-        $roles = $this->role->latest()->paginate(10);
-        $deletedRoles = $this->role->onlyTrashed()->latest()->paginate(10);
+        $roles = $this->role->latest()->paginate(15);
+        $deletedRoles = $this->role->onlyTrashed()->latest()->paginate(15);
 
         return view('admin.page.role.index', compact('roles', 'deletedRoles'));
     }

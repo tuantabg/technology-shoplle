@@ -15,13 +15,14 @@ class CategoryController extends Controller
 
     public function __construct(Category $category)
     {
+        $this->middleware('auth');
         $this->category = $category;
     }
 
     public function index()
     {
-        $categories = $this->category->latest()->paginate(10);
-        $deletedCategories = $this->category->onlyTrashed()->latest()->paginate(10);
+        $categories = $this->category->latest()->paginate(15);
+        $deletedCategories = $this->category->onlyTrashed()->latest()->paginate(15);
 
         return view('admin.page.category.index', compact('categories', 'deletedCategories'));
     }
@@ -38,10 +39,11 @@ class CategoryController extends Controller
         $this->category->create([
             'name' => $request->input('name'),
             'parent_id' => $request->input('parent_id'),
+            'view_home' => $request->input('view_home'),
             'slug' => $request->input('slug'),
         ]);
 
-        return redirect()->route('categories.index')->with('message','Thêm danh mục thành công');
+        return redirect()->route('categories.create')->with('message','Thêm danh mục thành công');
     }
 
     public function edit($id)
@@ -57,6 +59,7 @@ class CategoryController extends Controller
         $this->category->find($id)->update([
             'name' => $request->input('name'),
             'parent_id' => $request->input('parent_id'),
+            'view_home' => $request->input('view_home'),
             'slug' => $request->input('slug'),
         ]);
 

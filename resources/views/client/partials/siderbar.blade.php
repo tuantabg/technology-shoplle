@@ -1,64 +1,47 @@
-<section id="slider"><!--slider-->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#slider-carousel" data-slide-to="1"></li>
-                        <li data-target="#slider-carousel" data-slide-to="2"></li>
-                    </ol>
+@php $baseUrl = config('app.base_url'); @endphp
 
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free E-Commerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="technology_shoplle/images/home/girl1.jpg" class="girl img-responsive" alt="" />
-                                <img src="technology_shoplle/images/home/pricing.png"  class="pricing" alt="" />
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>100% Responsive Design</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="technology_shoplle/images/home/girl2.jpg" class="girl img-responsive" alt="" />
-                                <img src="technology_shoplle/images/home/pricing.png"  class="pricing" alt="" />
-                            </div>
+@if($sliders)
+    <section id="slider">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            @foreach($sliders as $key => $slider)
+                                <li data-target="#slider-carousel" data-slide-to="{{ $loop->index }}" class="{{ ($loop->index == 0) ? 'active' : '' }}"></li>
+                            @endforeach
+                        </ol>
+
+                        <div class="carousel-inner">
+                            @foreach($sliders as $key => $slider)
+                                <div class="item {{ ($loop->index == 0) ? 'active' : '' }}">
+                                    <div class="col-sm-6">
+                                        <h1 class="font-weight-bold">{{ $slider->name }}</h1>
+                                        {{--<h2>Free E-Commerce Template</h2>--}}
+                                        <p>{!! $slider->description !!}</p>
+                                        @if(!$slider->image_url == null)
+                                            <a href="{{ $slider->image_url }}" class="btn btn-default get">Get it now</a>
+                                        @endif
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="{{ $baseUrl . $slider->image_path }}" class="girl img-responsive" alt="{{ $slider->image_name }}" />
+                                        <img src="{{ asset('technology_shoplle/images/home/pricing.png') }}"  class="pricing" alt="" />
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
 
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free Ecommerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="technology_shoplle/images/home/girl3.jpg" class="girl img-responsive" alt="" />
-                                <img src="technology_shoplle/images/home/pricing.png" class="pricing" alt="" />
-                            </div>
-                        </div>
-
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
                     </div>
-
-                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 </div>
-
             </div>
         </div>
-    </div>
-</section><!--/slider-->
+    </section>
+@else
+    @include('client.partials.advertisement')
+@endif

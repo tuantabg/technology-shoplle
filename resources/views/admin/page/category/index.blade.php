@@ -23,14 +23,14 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-uppercase active" id="nav-product-tab" data-toggle="pill"
                                            href="#nav-product" role="tab" aria-controls="pills-home"
-                                           aria-selected="true">Sản phẩm
+                                           aria-selected="true">Danh mục
                                         </a>
                                     </li>
                                     @can('deleteCategory')
                                     <li class="nav-item">
                                         <a class="nav-link text-uppercase" id="pills-profile-tab" data-toggle="pill"
                                            href="#nav-product-delete" role="tab" aria-controls="nav-product-delete"
-                                           aria-selected="false">Sản phẩm đã xóa
+                                           aria-selected="false">Danh mục đã xóa
                                         </a>
                                     </li>
                                     @endcan
@@ -45,6 +45,7 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">Tên danh mục</th>
                                                 <th scope="col">Slug</th>
+                                                <th scope="col">Trang chủ</th>
                                                 <th class="text-right" scope="col">Tác vụ</th>
                                             </tr>
                                             </thead>
@@ -54,6 +55,7 @@
                                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                                     <td>{{ $category->name }}</td>
                                                     <td>{{ $category->slug }}</td>
+                                                    <td>{{ !($category->view_home == null) ? 'Hiển thị' : 'Ẩn' }}</td>
                                                     <td class="text-right">
                                                         @can('editCategory')
                                                             <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-primary btn-sm">
@@ -84,6 +86,7 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">Tên danh mục</th>
                                                 <th scope="col">Slug</th>
+                                                <th scope="col">Hiển thị</th>
                                                 <th class="text-right" scope="col">Tác vụ</th>
                                             </tr>
                                             </thead>
@@ -93,6 +96,7 @@
                                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                                     <td>{{ $deletedCategory->name }}</td>
                                                     <td>{{ $deletedCategory->slug }}</td>
+                                                    <td>{{ !($deletedCategory->view_home == null) ? 'Hiển thị' : 'Ẩn' }}</td>
                                                     <td class="text-right">
                                                         <a href="{{ route('categories.delete.recover', ['id' => $deletedCategory->id]) }}"
                                                            class="btn btn-primary btn-sm">
